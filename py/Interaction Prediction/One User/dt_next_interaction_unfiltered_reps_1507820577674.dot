@@ -1,0 +1,32 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="prev_interaction <= 0.5\ngini = 0.567\nsamples = 2631\nvalue = [1666, 366, 62, 215, 8, 150, 77, 87]\nclass = hover"] ;
+1 [label="gini = 0.408\nsamples = 1667\nvalue = [1246, 295, 29, 0, 2, 0, 35, 60]\nclass = hover"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="prev_interaction <= 2.5\ngini = 0.727\nsamples = 964\nvalue = [420, 71, 33, 215, 6, 150, 42, 27]\nclass = hover"] ;
+0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+3 [label="prev_interaction <= 1.5\ngini = 0.622\nsamples = 428\nvalue = [53, 9, 5, 215, 0, 142, 4, 0]\nclass = click"] ;
+2 -> 3 ;
+4 [label="gini = 0.571\nsamples = 366\nvalue = [46, 8, 0, 215, 0, 95, 2, 0]\nclass = click"] ;
+3 -> 4 ;
+5 [label="gini = 0.405\nsamples = 62\nvalue = [7, 1, 5, 0, 0, 47, 2, 0]\nclass = set_attribute_weight_vector_calc"] ;
+3 -> 5 ;
+6 [label="prev_interaction <= 5.5\ngini = 0.507\nsamples = 536\nvalue = [367, 62, 28, 0, 6, 8, 38, 27]\nclass = hover"] ;
+2 -> 6 ;
+7 [label="prev_interaction <= 3.5\ngini = 0.393\nsamples = 373\nvalue = [286, 42, 27, 0, 6, 8, 2, 2]\nclass = hover"] ;
+6 -> 7 ;
+8 [label="gini = 0.279\nsamples = 215\nvalue = [179, 36, 0, 0, 0, 0, 0, 0]\nclass = hover"] ;
+7 -> 8 ;
+9 [label="prev_interaction <= 4.5\ngini = 0.506\nsamples = 158\nvalue = [107, 6, 27, 0, 6, 8, 2, 2]\nclass = hover"] ;
+7 -> 9 ;
+10 [label="gini = 0.0\nsamples = 8\nvalue = [0, 0, 0, 0, 0, 8, 0, 0]\nclass = set_attribute_weight_vector_calc"] ;
+9 -> 10 ;
+11 [label="gini = 0.455\nsamples = 150\nvalue = [107, 6, 27, 0, 6, 0, 2, 2]\nclass = hover"] ;
+9 -> 11 ;
+12 [label="prev_interaction <= 6.5\ngini = 0.666\nsamples = 163\nvalue = [81, 20, 1, 0, 0, 0, 36, 25]\nclass = hover"] ;
+6 -> 12 ;
+13 [label="gini = 0.678\nsamples = 76\nvalue = [33, 8, 1, 0, 0, 0, 25, 9]\nclass = hover"] ;
+12 -> 13 ;
+14 [label="gini = 0.627\nsamples = 87\nvalue = [48, 12, 0, 0, 0, 0, 11, 16]\nclass = hover"] ;
+12 -> 14 ;
+}

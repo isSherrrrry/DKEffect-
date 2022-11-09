@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>User Study Post Questionnaire</title>
+
+<script src="lib/le.min.js"></script>
+<script src="lib/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/my-stylesheet.css">
+</head>
+
+<body onload="onLoadScript();" bgcolor=FFFFFF text=000000 alink=0000FF link=0000FF vlink=0000FF>
+
+<h1><u>Post Questionnaire</u></h1>
+<script type="text/javascript">
+	function onLoadScript() {
+		console.log('user id: ', window.localStorage.getItem("userId"));
+	
+		if (window.localStorage.getItem("userId") == null || window.localStorage.getItem("whichCondition") == null) {
+			alert("Error: No user id found. To participate in the study, you must indicate consent first.");
+			var w = window.open("consent.html", "_self");
+		}
+
+		document.body.innerHTML = document.body.innerHTML + '<p><h3>Please copy and paste <b><span class="studyRed">' + window.localStorage.getItem("userId") + '</span></b> into the id field of the survey. Please be sure to scroll through to complete the entire survey before continuing.</h3></p>';
+		document.body.innerHTML = document.body.innerHTML + '<iframe src="https://northwestern.az1.qualtrics.com/jfe/form/SV_3lWSNHBzdh7XSwS" width="900" height="450" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>';
+        document.body.innerHTML = document.body.innerHTML + '<h3>Input the code showed after you submit the survey and then click <b><span class="studyBlue">Continue</span></b> to proceed to next phase.</h3>';
+        document.body.innerHTML = document.body.innerHTML + '<form><input id="txt_submit" type="text" style="border-radius: 5px; -webkit-border-radius: 5px;"; name="test" placeholder="Input the code here"><span id="msg"></span></form>';
+        document.body.innerHTML = document.body.innerHTML + '<button type="button" id="continueButton" class="studyNav">Continue</button>';
+
+        document.getElementById("continueButton").onclick = function () {
+            var txt_submit = document.getElementById("txt_submit");
+            var strText = txt_submit.value;
+            console.log(strText);
+            if ("8asd6m" == strText) {
+                var w = window.open("ending.html", "_self");
+            }else alert("You must input the correct code showed at the END of the survey.");
+        };
+
+	}
+
+
+    //disable back button
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+    history.go(1);
+
+</script>
+
+</body>
+</html>

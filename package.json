@@ -1,0 +1,27 @@
+{
+  "name": "categorization_task",
+  "version": "1.0.0",
+  "description": "Go into the 'categorization_experiment' directory",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "@google-cloud/logging": "^9.0.1",
+    "firebase": "^8.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MengyuChan/categorization_experiment-master.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MengyuChan/categorization_experiment-master/issues"
+  },
+  "homepage": "https://github.com/MengyuChan/categorization_experiment-master#readme"
+}

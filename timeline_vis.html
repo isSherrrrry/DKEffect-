@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<style>
+
+.line {
+    fill: none;
+    stroke-width: 1.5px;
+}
+
+rect.bordered {
+    stroke: #E6E6E6;
+    stroke-width: 1px;   
+}
+
+text {
+    font-size: 9pt;
+    font-family: Consolas, courier;
+    fill: #000;
+}
+
+text.title {
+    font-size: 12pt;
+}
+
+</style>
+<script src='//d3js.org/d3.v4.min.js'></script>
+
+<body id='body'>
+  <script type='text/javascript'>
+
+  var cond_role = ['1506460542091', '1506629987658', '1507820577674', '1507828088222', '1508856756204'],
+      cond_size = ['1508339795840', '1508441006909', '1508778224670', '1509482115747', '1509568819048'],
+      role_color = '#1f77b4',
+      size_color = '#ff7f0e', 
+      legend_element_width = 30,
+      legend_element_height = 15,
+      text_height = 10,
+      //window_methods = ['all', 'fixed', 'category_v1', 'category_v2', 'classification_v1', 'classification_v2'],
+      window_methods = ['fixed'], 
+      metrics = ['data_point_coverage', 'data_point_distribution', 'attribute_coverage', 'attribute_distribution', 'attribute_weight_coverage', 'attribute_weight_distribution'], 
+      attributes = ['Avg. 3-Pointers Att.', 'Avg. 3-Pointers Made', 'Avg. Assists', 'Avg. Blocks', 'Avg. Field Goals Att.', 'Avg. Field Goals Made', 'Avg. Free Throws Att.', 'Avg. Free Throws Made', 'Avg. Minutes', 'Avg. Offensive Rebounds', 'Avg. Personal Fouls', 'Avg. Points', 'Avg. Steals', 'Avg. Total Rebounds', 'Avg. Turnovers', 'Games Played', 'Height (Inches)', 'Weight (Pounds)'], 
+      path = './real_data_filtered/analysis/';
+
+
+  var margin = { top: 20, right: 100, bottom: 100, left: 50, title_offset: 10, pad: 5 },
+      width = 2500 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+  var line_chart = function(csvFile, window_method, metric) {
+
+    d3.csv(csvFile, function(error, data) {
+      if (error) 
+        throw error;
+
+      var users = data.columns.slice(1).map(function(id) {
+        cur_map = {
+          id: id,
+          values: data.map(function(d) {
+            return { time_stamp: d.time_stamp, bias: d[id] };
+          })
+        };
+        return cur_map;
+      });
+
+      var svg = d3.select('#chart_' + window_method + '_' + metric).append('svg')
+          .attr('id', 'svg_' + window_method + '_' + metric)
+          .attr('width', width + margin.left + margin.right)
+          .attr('height', height + margin.top + margin.bottom);
+
+      var g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+      var x = d3.scaleLinear().range([0, width]),
+          y = d3.scaleLinear().range([height, margin.title_offset]);
+
+      x.domain(d3.extent(data, function(d) { return +d.time_stamp; }));
+      y.domain([0, 1]);
+
+      /*y.domain([
+        d3.min(users, function(c) { return d3.min(c.values, function(d) { return d.bias; }); }),
+        d3.max(users, function(c) { return d3.max(c.values, function(d) { return d.bias; }); })
+      ]);*/
+
+      var line = d3.line()
+          .curve(d3.curveBasis)
+          .x(function(d) { return x(d.time_stamp); })
+          .y(function(d) { return y(d.bias); });
+
+      g.append('g')
+          .attr('class', 'axis axis--x')
+          .attr('transform', 'translate(0,' + height + ')')
+          .call(d3.axisBottom(x))
+        .append('text')
+          .attr('y', 6 + margin.title_offset)
+          //.attr('dy', '0.71em')
+          .attr('x', width)
+          .attr('fill', '#000')
+          .text('Time (Interaction #)')
+          .style('font-size', '9pt')
+          .style('font-family', 'Consolas, courier')
+          .style('fill', '#000000');
+
+      g.append('g')
+          .attr('class', 'axis axis--y')
+          .call(d3.axisLeft(y))
+        .append('text')
+          .attr('transform', 'rotate(-90)')
+          .attr('x', -margin.title_offset)
+          .attr('y', 6)
+          //.attr('dy', '0.71em')
+          .attr('fill', '#000')
+          .text('Bias Value')
+          .style('font-size', '9pt')
+          .style('font-family', 'Consolas, courier')
+          .style('fill', '#000000');
+
+      var title = g.selectAll('.title')
+          .data([''])
+          .enter().append('g').append('text')
+          .text(function (d) { 
+              //var cur_title = metric + '(' + window_method + ' windowing)';
+              var cur_title = metric;
+              return cur_title; 
+          }).attr('x', 0)
+          .attr('y', 0)
+          .attr('class', 'title')
+          .style('font-size', '12pt')
+          .style('font-family', 'Consolas, courier')
+          .style('fill', '#000000');
+
+      var user = g.selectAll('.user')
+        .data(users)
+        .enter().append('g')
+          .attr('class', 'user');
+
+      user.append('path')
+          .attr('class', 'line')
+          .attr('d', function(d) { 
+            value_array = [];
+            for (var i = 0; i < d.values.length; i++) {
+              if (d.values[i].bias != '')
+                value_array.push(d.values[i]);
+            }
+            return line(value_array);
+          }).style('stroke', function(d) { 
+            if (cond_role.indexOf(d.id) > -1)
+              return role_color;
+            else
+              return size_color;
+          }).style('stroke-width', '1.5px')
+          .style('fill', 'none')
+          .style('fill-opacity', 0);
+
+      /*user.append('text')
+          .datum(function(d) { 
+            val = d.values[0];
+            for (var i = 0; i < d.values.length; i++) {
+              if (d.values[i].bias != '')
+                val = d.values[i];
+            }
+            return { id: d.id, value: val }; 
+          }).attr('transform', function(d) { return 'translate(' + x(d.value.time_stamp) + ',' + y(d.value.bias) + ')'; })
+          .attr('x', 10)
+          .attr('y', 0)
+          .attr('dy', '0.35em')
+          .style('font', '10px sans-serif')
+          .text(function(d) { return d.id; })
+          .style('font-size', '9pt')
+          .style('font-family', 'Consolas, courier')
+          .style('fill', '#000000');*/
+
+      user.append('circle')
+          .datum(function(d) { 
+            val = d.values[0];
+            for (var i = 0; i < d.values.length; i++) {
+              if (d.values[i].bias != '')
+                val = d.values[i];
+            }
+            return { id: d.id, value: val }; 
+          }).attr('cx', function(d) { return x(d.value.time_stamp); })
+          .attr('cy', function(d) { return y(d.value.bias); })
+          .attr('r', 5)
+          .attr('fill', function(d) {
+            if (cond_role.indexOf(d.id) > -1)
+              return role_color;
+            else
+              return size_color;
+          });
+
+      var legend = g.selectAll('.legend')
+          .data(['Size Condition', 'Role Condition'])
+          .enter().append('g')
+          .attr('class', 'legend');
+
+      legend.append('rect')
+          .attr('x', 0)
+          .attr('y', function(d) {
+              if (d.indexOf('Role') > -1) 
+                  return height + (4 * margin.pad);
+              else
+                return height + text_height + (6 * margin.pad);
+          }).attr('width', legend_element_width)
+          .attr('height', legend_element_height)
+          .attr('class', 'bordered')
+          .style('fill', function(d) { 
+            if (d.indexOf('Size') > -1)
+                return size_color;
+            else
+                return role_color;
+          }).style('stroke', '#E6E6E6')
+          .style('stroke-width', '1px');
+
+      legend.append('text')
+          .text(function(d) { 
+              return d; 
+          }).attr('x', legend_element_width + (0.5 * legend_element_width))
+          .attr('y', function(d) {
+              if (d.indexOf('Role') > -1) 
+                  return height + (4 * margin.pad) + text_height;
+              else
+                return height + (2 * text_height) + (6 * margin.pad);
+          }).style('text-anchor', 'left')
+          .style('font-size', '9pt')
+          .style('font-family', 'Consolas, courier')
+          .style('fill', '#000000');
+
+      legend.exit().remove();
+
+      var saveData = (function () {
+          var a = document.createElement('a');
+          document.body.appendChild(a);
+          a.style = 'display: none';
+          return function (fileName) {
+              var cur_chart = document.getElementById('chart_' + window_method + '_' + metric);
+
+              var blob = new Blob([cur_chart.innerHTML], {type: 'image/svg+xml'}),
+                  url = window.URL.createObjectURL(blob);
+              a.href = url;
+              a.download = fileName;
+              a.click();
+              window.URL.revokeObjectURL(url);
+          };
+
+          document.body.innerHTML = '';
+      }());
+
+      saveData('timeline_' + window_method + '_' + metric + '.svg');
+    });
+  };
+
+  for (var i = 0; i < window_methods.length; i++) {
+    var wm = window_methods[i];
+    for (var j = 0; j < metrics.length; j++) {
+      var cur_metric = metrics[j];
+      if (cur_metric.indexOf('data_point') > -1) {
+        var cur_div = document.createElement('div');
+        cur_div.id = 'chart_' + wm + '_' + cur_metric;
+        document.getElementById('body').appendChild(cur_div);
+
+        var file_name = path + cur_metric + '_' + wm + '_time_series.csv';
+        line_chart(file_name, wm, cur_metric);
+      } else {
+        for (var k = 0; k < attributes.length; k++) {
+          var attr = attributes[k];
+          cur_metric = metrics[j] + '_' + attr;
+          cur_metric_fixed = cur_metric.replace(/\s/g, '').replace(/\./g, '').replace('(', '').replace(')', '');
+
+          var cur_div = document.createElement('div');
+          cur_div.id = 'chart_' + wm + '_' + cur_metric_fixed;
+          document.getElementById('body').appendChild(cur_div);
+
+          var file_name = path + cur_metric + '_' + wm + '_time_series.csv';
+          line_chart(file_name, wm, cur_metric_fixed);
+        }
+      }
+    }
+  }
+
+  </script>
+</body>

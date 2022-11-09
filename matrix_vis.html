@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<html>
+	<head>
+		<style>
+			rect.bordered {
+				stroke: #E6E6E6;
+				stroke-width: 1px;   
+			}
+
+			text.mono {
+				font-size: 9pt;
+				font-family: Consolas, courier;
+				fill: #000; 
+			}
+
+			text.axis-quantile {
+				fill: #000;
+			}
+
+			text.axis-time {
+				fill: #000;
+			}
+
+			text.title {
+				font-size: 12pt;
+				font-family: Consolas, courier;
+				fill: #000;
+			}
+
+		</style>
+		<script src='http://d3js.org/d3.v3.js'></script>
+
+	</head>
+
+	<body id='body'>
+		<script type='text/javascript'>
+
+			var margin = { top: 50, right: 50, bottom: 150, left: 120 },
+				width = 0,
+				height = 0,
+				grid_width = 0,
+				grid_height = 0,
+				legend_element_width = 0,
+				text_height = 25,
+				legend_height = 5,
+				buckets_coverage = 2,
+				buckets_distribution = 9,
+				colors_coverage = ['#ffffff', '#000000'],
+				colors_distribution = ['#ffffff', '#f0f0f0', '#d9d9d9', '#bdbdbd', '#969696', '#737373', '#525252', '#252525', '#000000'],
+				quantiles = [],
+				times = [],
+				decision_times = [], // will hold list of time_stamp indices where decisions occurred
+				decisions = [], // will hold list of tuples [start_index, end_index, position]
+				position_colors = { C: '#9467bd', PF: '#d62728', SF: '#2ca02c', SG: '#ff7f0e', PG: '#1f77b4' },
+				path = './real_data_filtered/',
+				//users = ['1506460542091', '1506629987658', '1507820577674', '1507828088222', '1508856756204', '1508339795840', '1508441006909', '1508778224670', '1509482115747', '1509568819048'],
+				users = ['1509568819048'],
+				//attributes = ['Avg. Assists'],
+				metrics = ['data_point_coverage', 'data_point_distribution', 'attribute_coverage', 'attribute_distribution', 'attribute_weight_coverage', 'attribute_weight_distribution'],
+				attributes = ['Avg. 3-Pointers Att.', 'Avg. 3-Pointers Made', 'Avg. Assists', 'Avg. Blocks', 'Avg. Field Goals Att.', 'Avg. Field Goals Made', 'Avg. Free Throws Att.', 'Avg. Free Throws Made', 'Avg. Minutes', 'Avg. Offensive Rebounds', 'Avg. Personal Fouls', 'Avg. Points', 'Avg. Steals', 'Avg. Total Rebounds', 'Avg. Turnovers', 'Games Played', 'Height (Inches)', 'Weight (Pounds)'],
+				point_guards = ['051', '079', '086', '134', '195', '213', '309', '433', '496', '513', '571', '600', '702', '752', '771', '799', '859', '920', '942', '966'],
+				shooting_guards = ['008', '011', '013', '030', '049', '058', '162', '167', '253', '339', '391', '442', '554', '570', '763', '900', '919', '921', '952', '992'], 
+				small_forwards = ['085', '185', '199', '278', '289', '380', '395', '537', '574', '585', '590', '640', '689', '751', '755', '764', '828', '884', '887', '894'], 
+				power_forwards = ['023', '107', '113', '128', '161', '170', '335', '520', '562', '606', '678', '686', '762', '819', '824', '854', '878', '959', '980', '995'], 
+				centers = ['047', '114', '127', '136', '166', '299', '310', '324', '348', '383', '384', '394', '463', '473', '597', '603', '611', '621', '852', '903'], 
+				data_points = point_guards.concat(shooting_guards).concat(small_forwards).concat(power_forwards).concat(centers);
+
+			var heatmap_chart = function(csvFile, user_id, window_method, metric) {
+				d3.csv(path + csvFile, function(d, i) {
+					if (i == 0) { // reset the arrays so they don't interfere with other vis's
+						quantiles = [];
+						times = [];
+						decision_times = [];
+						decisions = [];
+					}
+
+					if (times.indexOf(+d.time_stamp) < 0)
+						times.push(+d.time_stamp);
+					if (metric.indexOf('attribute') > -1 && quantiles.indexOf('Q' + d.quantile) < 0)
+						quantiles.push('Q' + d.quantile);
+					if (decision_times.indexOf(+d.time_stamp) < 0 && d.decision != 'none' && d.decision != 'Un-Assign') {
+						decision_times.push(+d.time_stamp);
+						if (decisions.length == 0)
+							decisions.push([1, +d.time_stamp, d.decision]);
+						else {
+							if (d.decision != decisions[decisions.length - 1][2]) {
+								decisions[decisions.length - 1][1] = +d.time_stamp;
+								decisions.push([decisions[decisions.length - 1][1], +d.time_stamp, d.decision]);
+							} else
+								decisions[decisions.length - 1][1] = +d.time_stamp;
+						}
+					}
+          
+          			if (metric.indexOf('data_point') > -1) {
+          				return {
+							data_point: d.data_point,
+							time_stamp: +d.time_stamp,
+							value: +d.value,
+							decision: d.decision
+						};
+          			} else {
+						return {
+							quantile: +d.quantile.substring(0, 1),
+							time_stamp: +d.time_stamp,
+							value: +d.value,
+							decision: d.decision
+						};
+					}
+				}, function(error, data) {
+					grid_width = 2;
+					if (metric.indexOf('attribute') > -1) {
+						height = 4 * grid_height + margin.top + margin.bottom;
+						grid_height = 10;
+					} else {
+						height = 100 * grid_height + margin.top + margin.bottom;
+						grid_height = 2;
+					}
+					width = times.length * grid_width + margin.left + margin.right;
+					legend_element_width = grid_width * 40;
+
+					// svg
+					var svg = d3.select('#chart_' + user_id + '_' + metric).append('svg')
+						.attr('id', 'svg_' + user_id + '_' + metric)
+						.attr('width', width + margin.left + margin.right)
+						.attr('height', height + margin.top + margin.bottom)
+						.append('g')
+						.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+					// title
+    				var title = svg.selectAll('.title')
+						.data([''])
+						.enter().append('g').append('text')
+						.text(function (d) { 
+							var cur_title = metric + '(User ' + user_id + ')';
+							return cur_title; 
+						}).attr('x', 0)
+						.attr('y', 0)
+						.attr('class', 'title');
+
+					// axis labels
+					if (metric.indexOf('attribute') > -1) {
+						var quantile_labels = svg.selectAll('.quantileLabel')
+							.data(quantiles)
+							.enter().append('text')
+							.text(function (d) { return d; })
+							.attr('x', 0)
+							.attr('y', function (d, i) { return (i + 1) * grid_height + (2 * text_height); })
+							.style('text-anchor', 'end')
+							.attr('transform', 'translate(-6,' + grid_height / 1.5 + ')')
+							.attr('class', function (d, i) { 
+								return ((i >= 0 && i <= 4) ? 'quantileLabel mono axis axis-quantile' : 'quantileLabel mono axis'); 
+							});
+					} else if (metric.indexOf('data_point') > -1) {
+						/*var data_point_labels = svg.selectAll('.dataPointLabel')
+							.data(data_points)
+							.enter().append('text')
+							.text(function (d) { return d; })
+							.attr('x', 0)
+							.attr('y', function (d, i) { return (i + 1) * grid_height + (2 * text_height); })
+							.style('text-anchor', 'end')
+							.style('fill', function(d) {
+								if (point_guards.indexOf(d) > -1)
+									return position_colors.PG;
+								else if (shooting_guards.indexOf(d) > -1)
+									return position_colors.SG;
+								else if (small_forwards.indexOf(d) > -1)
+									return position_colors.SF;
+								else if (power_forwards.indexOf(d) > -1)
+									return position_colors.PF;
+								else if (centers.indexOf(d) > -1)
+									return position_colors.C;
+								else
+									return '#000000';
+							}).attr('transform', 'translate(-6,' + grid_height / 1.5 + ')')
+							.attr('class', function (d, i) { 
+								return ((i >= 0 && i <= 4) ? 'quantileLabel mono axis axis-quantile' : 'quantileLabel mono axis'); 
+							});*/
+
+						var data_point_labels = svg.selectAll('.dataPointLabel')
+							.data(['PG', 'SG', 'SF', 'PF', 'C'])
+							.enter().append('rect')
+							.attr('x', -1 * legend_height / 2 - 2)
+							.attr('y', function(d, i) { return (text_height * 2) + legend_height + grid_height + (i * 20 * grid_height); })
+							.attr('rx', 2)
+							.attr('ry', 2)
+							.attr('width', legend_height)
+							.attr('height', 20 * grid_height)
+							.style('fill', function(d) {  
+								if (d == 'C') 
+									return position_colors.C;
+								else if (d == 'PF')
+									return position_colors.PF;
+								else if (d == 'SF')
+									return position_colors.SF;
+								else if (d == 'SG')
+									return position_colors.SG;
+								else if (d == 'PG')
+									return position_colors.PG;
+								else
+									return '#000000';
+							});
+					}
+
+					var time_labels = svg.selectAll('.timeLabel')
+						.data(times)
+						.enter().append('text')
+						.text(function(d) { return d; })
+						.attr('x', function(d, i) { return i * grid_width; })
+						.attr('y', 2 * text_height)
+						.style('text-anchor', 'middle')
+						.style('display', function(d) { if (+d % 25 != 0) return 'none'; })
+						.attr('transform', 'translate(' + grid_width / 2 + ', -6)')
+						.attr('class', 'timeLabel mono axis axis-time');
+
+					// decision color bar
+					if (decisions.length > 0) {
+						decisions[decisions.length - 1][1] = times[times.length - 1] + 1;
+						var decision_bars = svg.selectAll('.decision')
+							.data(decisions)
+							.enter().append('rect')
+							.attr('x', function(d) { return d[0] * grid_width; })
+							.attr('y', function(d) { return  2 * text_height; })
+							.attr('rx', 2)
+							.attr('ry', 2)
+							.attr('width', function(d) { return grid_width * (d[1] - d[0]); })
+							.attr('height', legend_height)
+							.attr('class', 'decision')
+							.style('fill', function(d) {  
+								if (d[2] == 'Center') 
+									return position_colors.C;
+								else if (d[2] == 'Power Forward')
+									return position_colors.PF;
+								else if (d[2] == 'Small Forward')
+									return position_colors.SF;
+								else if (d[2] == 'Shooting Guard')
+									return position_colors.SG;
+								else if (d[2] == 'Point Guard')
+									return position_colors.PG;
+								else
+									return '#000000';
+							});
+					}
+
+					// color scale
+					if (metric.indexOf('coverage') > -1) {
+						buckets = buckets_coverage;
+						colors = colors_coverage;
+					} else {
+						buckets = buckets_distribution;
+						colors = colors_distribution;
+					}
+
+					var color_scale = d3.scale.quantile()
+						.domain([d3.min(data, function (d) { return d.value; }), buckets - 1, d3.max(data, function (d) { return d.value; })])
+						.range(colors);
+
+					// heat map
+					var cards = svg.selectAll('.time_stamp')
+						.data(data, function(d) { 
+							if (metric.indexOf('attribute') > -1)
+								return d.quantile + ':' + d.time_stamp; 
+							else 
+								return (data_points.indexOf(d.data_point) + 1) + ':' + d.time_stamp;
+						});
+
+					cards.append('title');
+
+					cards.enter().append('rect')
+						.attr('x', function(d) { return (d.time_stamp) * grid_width; })
+						.attr('y', function(d, i) { 
+							if (metric.indexOf('attribute') > -1)
+								return d.quantile * grid_height + (2 * text_height); 
+							else
+								return (data_points.indexOf(d.data_point) + 1) * grid_height + (2 * text_height) + legend_height;
+						}).attr('rx', 2)
+						.attr('ry', 2)
+						.attr('width', grid_width)
+						.attr('height', grid_height)
+						.attr('class', 'time_stamp bordered')
+						.style('fill', function(d) { return color_scale(d.value); })
+						.style('stroke', '#E6E6E6')
+						.style('stroke-width', '1px');
+
+					cards.select('title').text(function(d) { return d.value; });
+					cards.exit().remove();
+
+					// axis labels
+					// x axis
+					svg.append('g')
+				        .append('text')
+				        .attr('y', text_height)
+				        .attr('x', 0)
+				        .attr('fill', '#000')
+				        .text('Time (Interaction #)')
+				        .style('font-size', '9pt')
+				        .style('font-family', 'Consolas, courier')
+				        .style('fill', '#000000');
+
+			        // y axis
+			      	svg.append('text')
+						.attr('transform', 'rotate(-90)')
+						.attr('x', function() {
+							if (metric.indexOf('attribute') > -1)
+								return -1 * ((2 * text_height) + (3 * grid_height));
+							else 
+								return -1 * ((2 * text_height) + (53 * grid_height));
+						}).attr('y', function() {
+							if (metric.indexOf('attribute') > -1)
+								return -90;
+							else
+								return -20;
+						}).attr('fill', '#000')
+				        .text(function() {
+				        	if (metric.indexOf('attribute') > -1)
+				        		return 'Quantile';
+				        	else
+				        		return 'Data Point';
+				        }).style('text-anchor', 'middle')
+				        .style('font-size', '9pt')
+				        .style('font-family', 'Consolas, courier')
+				        .style('fill', '#000000');
+
+			        // heat map legend
+					var legend = svg.selectAll('.legend')
+						.data([0].concat(color_scale.quantiles()), function(d) { return d; });
+
+					legend.enter().append('g')
+						.attr('class', 'legend');
+
+					legend.append('rect')
+						.attr('x', function(d, i) { return legend_element_width * i; })
+						.attr('y', function(d) {
+							if (metric.indexOf('attribute') > -1)
+								return (height / 3) + (2 * text_height);
+							else
+								return height + (2.5 * text_height);
+						}).attr('width', legend_element_width)
+						.attr('height', legend_height)
+						.attr('class', 'bordered')
+						.style('fill', function(d, i) { return colors[i]; })
+						.style('stroke', '#E6E6E6')
+						.style('stroke-width', '1px');
+
+					legend.append('text')
+						.attr('class', 'mono')
+						.text(function(d) { 
+							if (metric.indexOf('coverage') > -1) return Math.round(d);
+							else return '≥ ' + Math.round(d); 
+						}).attr('x', function(d, i) { return legend_element_width * i + (0.5 * legend_element_width); })
+						.attr('y', function(d) {
+							if (metric.indexOf('attribute') > -1)
+								return (height / 3) + (2 * grid_height) + (2 * text_height);
+							else 
+								return height + (3 * legend_height) + (2.5 * text_height);
+						}).style('text-anchor', 'middle');
+
+					legend.exit().remove();
+
+					// player legend
+					var player_legend = svg.selectAll('.player_legend')
+						.data(['PG', 'SG', 'SF', 'PF', 'C']);
+						
+					player_legend.enter().append('g')
+						.attr('class', 'player_legend');
+
+					player_legend.append('rect')
+						.attr('x', function(d, i) { return legend_element_width * i; })
+						.attr('y', function(d) {
+							if (metric.indexOf('attribute') > -1)
+								return (height / 3) + (3.5 * text_height);
+							else
+								return height + (3.5 * text_height);
+						}).attr('width', legend_element_width)
+						.attr('height', legend_height)
+						.attr('class', 'bordered')
+						.style('fill', function(d) { 
+							if (d == 'PG')
+								return position_colors.PG;
+							else if (d == 'SG') 
+								return position_colors.SG;
+							else if (d == 'SF')
+								return position_colors.SF;
+							else if (d == 'PF')
+								return position_colors.PF;
+							else if (d == 'C')
+								return position_colors.C;
+						}).style('stroke', '#E6E6E6')
+						.style('stroke-width', '1px');
+
+					player_legend.append('text')
+						.attr('class', 'mono')
+						.text(function(d) { return d; })
+						.attr('x', function(d, i) { return legend_element_width * i + (0.5 * legend_element_width); })
+						.attr('y', function(d) {
+							if (metric.indexOf('attribute') > -1)
+								return (height / 3) + (2 * grid_height) + (3.5 * text_height);
+							else 
+								return height + (3 * legend_height) + (3.5 * text_height);
+						}).style('text-anchor', 'middle');
+
+					player_legend.exit().remove();
+
+					// write data to file
+					var saveData = (function () {
+						var a = document.createElement('a');
+						document.body.appendChild(a);
+						a.style = 'display: none';
+						return function (fileName) {
+							var cur_chart = document.getElementById('chart_' + user_id + '_' + metric);
+
+							var blob = new Blob([cur_chart.innerHTML], {type: 'image/svg+xml'}),
+								url = window.URL.createObjectURL(blob);
+							a.href = url;
+							a.download = fileName;
+							a.click();
+							window.URL.revokeObjectURL(url);
+						};
+						document.body.innerHTML = '';
+					}());
+
+					saveData('user_' + user_id + '_' + window_method + '_' + metric + '.svg');
+				});  
+			};
+
+			for (var i = 0; i < users.length; i++) {
+				var cur_user = users[i];
+				var window_method = 'fixed';
+				path = './real_data_filtered/user_' + cur_user + '/logs/metric_matrices/';
+				console.log('User ' + cur_user);
+
+				var cur_metric = '';
+				for (var j = 0; j < metrics.length; j++) {
+					cur_metric = metrics[j];
+					if (metrics[j].indexOf('attribute_weight') > -1) {
+						for (var k = 0; k < attributes.length; k++) {
+							cur_metric = metrics[j] + '_' + attributes[k];
+							cur_metric = cur_metric.replace(/\s/g, '').replace(/\./g, '').replace('(', '').replace(')', '');
+
+							var cur_div = document.createElement('div');
+							cur_div.id = 'chart_' + cur_user + '_' + cur_metric;
+							document.getElementById('body').appendChild(cur_div);
+
+							file_name = metrics[j] + '_' + attributes[k] + '.csv';
+							heatmap_chart(file_name, cur_user, window_method, cur_metric);
+							//throw new Error('stopping to debug');
+						}
+					} else if (metrics[j].indexOf('data_point') > -1) {
+						var cur_div = document.createElement('div');
+						cur_div.id = 'chart_' + cur_user + '_' + cur_metric;
+						document.getElementById('body').appendChild(cur_div);
+						
+						file_name = metrics[j] + '.csv';
+						heatmap_chart(file_name, cur_user, window_method, cur_metric);
+						//throw new Error('stopping to debug'); 
+					} else if (metrics[j].indexOf('attribute') > -1) {
+						for (var k = 0; k < attributes.length; k++) {
+							cur_metric = metrics[j] + '_' + attributes[k];
+							cur_metric = cur_metric.replace(/\s/g, '').replace(/\./g, '').replace('(', '').replace(')', '');
+
+							var cur_div = document.createElement('div');
+							cur_div.id = 'chart_' + cur_user + '_' + cur_metric;
+							document.getElementById('body').appendChild(cur_div);
+
+							file_name = metrics[j] + '_' + attributes[k] + '.csv';
+							heatmap_chart(file_name, cur_user, window_method, cur_metric);
+							//throw new Error('stopping to debug');
+						}
+					} 
+				}
+			}
+
+		</script>
+	</body>
+</html>

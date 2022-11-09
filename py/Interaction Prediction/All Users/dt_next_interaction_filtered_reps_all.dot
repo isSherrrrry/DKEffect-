@@ -1,0 +1,36 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="prev_interaction <= 1.5\ngini = 0.701\nsamples = 6394\nvalue = [2883, 1750, 102, 103, 433, 430, 671, 19, 3]\nclass = hover"] ;
+1 [label="prev_interaction <= 0.5\ngini = 0.609\nsamples = 4630\nvalue = [2555, 1287, 32, 21, 250, 136, 349, 0, 0]\nclass = hover"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="gini = 0.648\nsamples = 2878\nvalue = [1271, 1079, 32, 21, 0, 131, 344, 0, 0]\nclass = hover"] ;
+1 -> 2 ;
+3 [label="gini = 0.428\nsamples = 1752\nvalue = [1284, 208, 0, 0, 250, 5, 5, 0, 0]\nclass = hover"] ;
+1 -> 3 ;
+4 [label="prev_interaction <= 4.5\ngini = 0.821\nsamples = 1764\nvalue = [328, 463, 70, 82, 183, 294, 322, 19, 3]\nclass = drag"] ;
+0 -> 4 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+5 [label="prev_interaction <= 3.0\ngini = 0.2\nsamples = 205\nvalue = [2, 9, 7, 0, 183, 4, 0, 0, 0]\nclass = set_attribute_weight_vector_calc"] ;
+4 -> 5 ;
+6 [label="gini = 0.37\nsamples = 102\nvalue = [2, 9, 7, 0, 80, 4, 0, 0, 0]\nclass = set_attribute_weight_vector_calc"] ;
+5 -> 6 ;
+7 [label="gini = 0.0\nsamples = 103\nvalue = [0, 0, 0, 0, 103, 0, 0, 0, 0]\nclass = set_attribute_weight_vector_calc"] ;
+5 -> 7 ;
+8 [label="prev_interaction <= 6.5\ngini = 0.79\nsamples = 1559\nvalue = [326, 454, 63, 82, 0, 290, 322, 19, 3]\nclass = drag"] ;
+4 -> 8 ;
+9 [label="prev_interaction <= 5.5\ngini = 0.789\nsamples = 861\nvalue = [235, 223, 62, 79, 0, 191, 69, 0, 2]\nclass = hover"] ;
+8 -> 9 ;
+10 [label="gini = 0.756\nsamples = 433\nvalue = [106, 161, 60, 63, 0, 24, 19, 0, 0]\nclass = drag"] ;
+9 -> 10 ;
+11 [label="gini = 0.721\nsamples = 428\nvalue = [129, 62, 2, 16, 0, 167, 50, 0, 2]\nclass = set_attribute_weight_vector_select"] ;
+9 -> 11 ;
+12 [label="prev_interaction <= 8.5\ngini = 0.721\nsamples = 698\nvalue = [91, 231, 1, 3, 0, 99, 253, 19, 1]\nclass = category_click"] ;
+8 -> 12 ;
+13 [label="prev_interaction <= 7.5\ngini = 0.72\nsamples = 695\nvalue = [90, 231, 1, 3, 0, 97, 253, 19, 1]\nclass = category_click"] ;
+12 -> 13 ;
+14 [label="gini = 0.721\nsamples = 676\nvalue = [86, 226, 1, 3, 0, 97, 243, 19, 1]\nclass = category_click"] ;
+13 -> 14 ;
+15 [label="gini = 0.609\nsamples = 19\nvalue = [4, 5, 0, 0, 0, 0, 10, 0, 0]\nclass = category_click"] ;
+13 -> 15 ;
+16 [label="gini = 0.444\nsamples = 3\nvalue = [1, 0, 0, 0, 0, 2, 0, 0, 0]\nclass = set_attribute_weight_vector_select"] ;
+12 -> 16 ;
+}

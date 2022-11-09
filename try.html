@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<select id="select">
+    <option value="A" url="http://www.baidu.com">第一个option</option>
+    <option value="B" url="http://www.qq.com">第二个option</option>
+</select>
+<script>
+    var myselect=document.getElementById("select");
+    var index=myselect.selectedIndex ;
+    var word = myselect.options[index].text;
+    var data = myselect.options[index].getAttribute('url');
+    console.log(word);
+    console.log(data);
+    console.log(index);
+</script>
+</body>
+</html>

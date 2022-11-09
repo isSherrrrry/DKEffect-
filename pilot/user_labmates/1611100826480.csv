@@ -1,0 +1,225 @@
+name,user_label,true_label,ans
+Dog78,Shih Tzu,Shih Tzu,T
+Dog78,Shih Tzu,Shih Tzu,T
+Dog76,Shih Tzu,Shih Tzu,T
+Dog73,Shih Tzu,Shih Tzu,T
+Dog64,Shih Tzu,Shih Tzu,T
+Dog61,Shih Tzu,Shih Tzu,T
+Dog75,Shih Tzu,Shih Tzu,T
+Dog65,Shih Tzu,Shih Tzu,T
+Dog71,Shih Tzu,Shih Tzu,T
+Dog71,Shih Tzu,Shih Tzu,T
+Dog70,Shih Tzu,Shih Tzu,T
+Dog67,Shih Tzu,Shih Tzu,T
+Dog69,Shih Tzu,Shih Tzu,T
+Dog63,Shih Tzu,Shih Tzu,T
+Dog80,Shih Tzu,Shih Tzu,T
+Dog74,Shih Tzu,Shih Tzu,T
+Dog77,Shih Tzu,Shih Tzu,T
+Dog53,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog52,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog56,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog44,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog79,Shih Tzu,Shih Tzu,T
+Dog62,Shih Tzu,Shih Tzu,T
+Dog72,Shih Tzu,Shih Tzu,T
+Dog68,Shih Tzu,Shih Tzu,T
+Dog66,Shih Tzu,Shih Tzu,T
+Dog47,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog43,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog41,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog54,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog46,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog13,Bernedoodle,American Foxhound,F
+Dog15,Bernedoodle,American Foxhound,F
+Dog36,Bernedoodle,Bernedoodle,T
+Dog36,Bernedoodle,Bernedoodle,T
+Dog1,Bernedoodle,American Foxhound,F
+Dog8,Bernedoodle,American Foxhound,F
+Dog9,Bernedoodle,American Foxhound,F
+Dog20,Bernedoodle,American Foxhound,F
+Dog19,Bernedoodle,American Foxhound,F
+Dog55,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog18,Bernedoodle,American Foxhound,F
+Dog49,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog3,Bernedoodle,American Foxhound,F
+Dog17,Bernedoodle,American Foxhound,F
+Dog58,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog60,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog14,Bernedoodle,American Foxhound,F
+Dog4,Bernedoodle,American Foxhound,F
+Dog51,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog48,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog12,Bernedoodle,American Foxhound,F
+Dog59,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog45,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog50,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog42,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog6,Bernedoodle,American Foxhound,F
+Dog7,Bernedoodle,American Foxhound,F
+Dog11,Bernedoodle,American Foxhound,F
+Dog11,Bernedoodle,American Foxhound,F
+Dog10,Bernedoodle,American Foxhound,F
+Dog16,Bernedoodle,American Foxhound,F
+Dog2,Bernedoodle,American Foxhound,F
+Dog5,Bernedoodle,American Foxhound,F
+Dog22,American Foxhound,Bernedoodle,F
+Dog29,American Foxhound,Bernedoodle,F
+Dog28,American Foxhound,Bernedoodle,F
+Dog32,American Foxhound,Bernedoodle,F
+Dog77,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog52,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog53,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog56,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog44,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog46,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog54,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog41,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog47,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog47,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog66,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog72,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog79,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog43,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog26,American Foxhound,Bernedoodle,F
+Dog68,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog33,American Foxhound,Bernedoodle,F
+Dog34,American Foxhound,Bernedoodle,F
+Dog27,American Foxhound,Bernedoodle,F
+Dog39,American Foxhound,Bernedoodle,F
+Dog39,American Foxhound,Bernedoodle,F
+Dog24,American Foxhound,Bernedoodle,F
+Dog62,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog39,American Foxhound,Bernedoodle,F
+Dog23,American Foxhound,Bernedoodle,F
+Dog35,American Bulldog,Bernedoodle,F
+Dog81,American Bulldog,American Bulldog,T
+Dog36,American Bulldog,Bernedoodle,F
+Dog38,American Bulldog,Bernedoodle,F
+Dog31,American Bulldog,Bernedoodle,F
+Dog21,American Bulldog,Bernedoodle,F
+Dog40,American Bulldog,Bernedoodle,F
+Dog37,American Bulldog,Bernedoodle,F
+Dog93,American Bulldog,American Bulldog,T
+Dog25,American Bulldog,Bernedoodle,F
+Dog82,American Bulldog,American Bulldog,T
+Dog98,American Bulldog,American Bulldog,T
+Dog99,American Bulldog,American Bulldog,T
+Dog85,American Bulldog,American Bulldog,T
+Dog96,American Bulldog,American Bulldog,T
+Dog90,American Bulldog,American Bulldog,T
+Dog97,American Bulldog,American Bulldog,T
+Dog94,American Bulldog,American Bulldog,T
+Dog87,American Bulldog,American Bulldog,T
+Dog100,American Bulldog,American Bulldog,T
+Dog95,American Bulldog,American Bulldog,T
+Dog88,American Bulldog,American Bulldog,T
+Dog91,American Bulldog,American Bulldog,T
+Dog86,American Bulldog,American Bulldog,T
+Dog84,American Bulldog,American Bulldog,T
+Dog92,American Bulldog,American Bulldog,T
+Dog89,American Bulldog,American Bulldog,T
+Dog83,American Bulldog,American Bulldog,T
+Dog30,Bernedoodle,Bernedoodle,T
+Dog57,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Player 114,Point Guard,Center,F
+Player 134,Point Guard,Point Guard,T
+Player 114,Center,Center,T
+Player 513,Point Guard,Point Guard,T
+Player 170,Center,Power Forward,F
+Player 852,Center,Center,T
+Player 903,Center,Center,T
+Player 299,Center,Center,T
+Player 335,Center,Power Forward,F
+Player 878,Center,Power Forward,F
+Player 824,Center,Power Forward,F
+Player 161,Center,Power Forward,F
+Player 384,Center,Center,T
+Player 166,Center,Center,T
+Player 603,Center,Center,T
+Player 621,Center,Center,T
+Player 678,Center,Power Forward,F
+Player 127,Center,Center,T
+Player 47,Center,Center,T
+Player 324,Center,Center,T
+Player 463,Center,Center,T
+Player 473,Center,Center,T
+Player 686,Center,Power Forward,F
+Player 562,Center,Power Forward,F
+Player 348,Center,Center,T
+Player 23,Center,Power Forward,F
+Player 136,Center,Center,T
+Player 819,Center,Power Forward,F
+Player 611,Center,Center,T
+Player 310,Center,Center,T
+Player 383,Center,Center,T
+Player 79,Point Guard,Point Guard,T
+Player 799,Point Guard,Point Guard,T
+Player 213,Point Guard,Point Guard,T
+Player 86,Point Guard,Point Guard,T
+Player 51,Point Guard,Point Guard,T
+Player 859,Point Guard,Point Guard,T
+Player 107,Power Forward,Power Forward,T
+Player 128,Power Forward,Power Forward,T
+Player 380,Power Forward,Small Forward,F
+Player 394,Power Forward,Center,F
+Player 995,Power Forward,Power Forward,T
+Player 980,Power Forward,Power Forward,T
+Player 597,Power Forward,Center,F
+Player 959,Power Forward,Power Forward,T
+Player 395,Power Forward,Small Forward,F
+Player 574,Power Forward,Small Forward,F
+Player 49,Shooting Guard,Shooting Guard,T
+Player 952,Shooting Guard,Shooting Guard,T
+Player 185,Shooting Guard,Small Forward,F
+Player 162,Shooting Guard,Shooting Guard,T
+Player 537,Shooting Guard,Small Forward,F
+Player 30,Shooting Guard,Shooting Guard,T
+Player 11,Shooting Guard,Shooting Guard,T
+Player 58,Shooting Guard,Shooting Guard,T
+Player 496,Shooting Guard,Point Guard,F
+Player 195,Shooting Guard,Point Guard,F
+Player 13,Shooting Guard,Shooting Guard,T
+Player 828,Shooting Guard,Small Forward,F
+Player 199,Shooting Guard,Small Forward,F
+Player 771,Small Forward,Point Guard,F
+Player 309,Small Forward,Point Guard,F
+Player 966,Small Forward,Point Guard,F
+Player 554,Small Forward,Shooting Guard,F
+Player 433,Small Forward,Point Guard,F
+Player 884,Small Forward,Small Forward,T
+Player 702,Small Forward,Point Guard,F
+Player 167,Small Forward,Shooting Guard,F
+Player 763,Small Forward,Shooting Guard,F
+Player 571,Small Forward,Point Guard,F
+Player 570,Small Forward,Shooting Guard,F
+Player 113,Small Forward,Power Forward,F
+Player 689,Small Forward,Small Forward,T
+Player 751,Center,Small Forward,F
+Player 253,Small Forward,Shooting Guard,F
+Player 752,Small Forward,Point Guard,F
+Player 942,Small Forward,Point Guard,F
+Player 894,Small Forward,Small Forward,T
+Player 887,Small Forward,Small Forward,T
+Player 339,Small Forward,Shooting Guard,F
+Player 921,Small Forward,Shooting Guard,F
+Player 640,Small Forward,Small Forward,T
+Player 764,Small Forward,Small Forward,T
+Player 992,Small Forward,Shooting Guard,F
+Player 590,Small Forward,Small Forward,T
+Player 85,Small Forward,Small Forward,T
+Player 289,Small Forward,Small Forward,T
+Player 8,Small Forward,Shooting Guard,F
+Player 391,Small Forward,Shooting Guard,F
+Player 606,Small Forward,Power Forward,F
+Player 900,Small Forward,Shooting Guard,F
+Player 755,Small Forward,Small Forward,T
+Player 600,Small Forward,Point Guard,F
+Player 854,Small Forward,Power Forward,F
+Player 278,Small Forward,Small Forward,T
+Player 442,Small Forward,Shooting Guard,F
+Player 919,Small Forward,Shooting Guard,F
+Player 762,Small Forward,Power Forward,F
+Player 585,Small Forward,Small Forward,T
+Player 520,Small Forward,Power Forward,F
+Player 920,Point Guard,Point Guard,T

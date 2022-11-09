@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>User Study Instructions</title>
+
+<script src="lib/le.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/my-stylesheet.css">
+</head>
+
+<body bgcolor=FFFFFF text=000000 alink=0000FF link=0000FF vlink=0000FF>
+
+<h1><u>Overview</u></h1>
+<span style="font-size:14px;">
+<p>The user study will consist of the following steps. The times below are estimates; however, you may take as much time as you like.</p>
+
+<ul>
+	<li>Background questionnaire (5 minutes)</li><br>
+	<li>Demonstration of the interface (4 minutes)</li><br>
+	<li>Practice using the interface [cars dataset] (5 minutes)</li><br>
+	<li>Refresher on basketball positions (3 minutes)</li><br>
+	<li>Study task [basketball dataset] (15-20 minutes)</li><br>
+	<li>Refresher on dog breeds (3 minutes)</li><br>
+	<li>Study task [dog breeds dataset] (15-20 minutes)</li><br>
+	<li>Post-study questionnaire (5 minutes)</li>
+</ul>
+
+<h1>Task</h1>
+
+<p>You will use the provided interactive visualization tool to explore a dataset of NBA basketball players and a dataset of individual dogs. Your task in this study is to use ALL of the data provided to assign each player to the position you believe they play and to assign each dog to the breed you think they belong to.</p>
+
+<h2>Ready?</h2>
+<h3><font class="studyRed">Please complete the study in one session. Do not press 'Back' or 'Refresh' in the browser until you have completed the entire study.</font></h3>
+<h4>Click <span class="studyBlue">Continue</span> below to proceed.</h4>
+
+<button type="button" id="continueButton" class="studyNav">Continue</button>
+</span>
+
+<script language="javascript" type="text/javascript">
+	console.log('user id: ', window.localStorage.getItem("userId"));
+	
+	if (window.localStorage.getItem("userId") != null && window.localStorage.getItem("whichCondition") != null) {
+		var consentLog = "{consent: true, userId: " + window.localStorage.getItem("userId") + ", whichCondition: " + window.localStorage.getItem("whichCondition") + "}";
+		LE.init('683e7afc-cacc-4ebc-9aaa-a9b31db9759f');
+		LE.log(consentLog);
+	} else { 
+		alert("Error: No user id found. To participate in the study, you must indicate consent first at va.gatech.edu/projects/bias_study/consent.html."); 
+		var w = window.open("consent.html", "_self");
+	}
+	
+	document.getElementById("continueButton").onclick = function () {
+		var w = window.open("presurvey.html", "_self");
+	};
+</script>
+
+
+</body>
+</html>

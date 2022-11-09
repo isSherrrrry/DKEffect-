@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>User Study Background Questionnaire</title>
+
+<script src="lib/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/my-stylesheet.css">
+</head>
+
+<body bgcolor=FFFFFF text=000000 alink=0000FF link=0000FF vlink=0000FF>
+
+
+<h1><u>Background Questionnaire</u></h1>
+
+<script type="text/javascript">
+
+    if (window.localStorage.getItem("userId") == null || window.localStorage.getItem("whichCondition") == null) {
+        alert("Error: No user id found. To participate in the study, you must indicate consent first at va.gatech.edu/projects/bias_study/consent.html.");
+        var w = window.open("consent.html", "_self");
+    }
+
+    document.body.innerHTML = document.body.innerHTML + '<p><h3>Please copy and paste <b><font class="studyRed">' + window.localStorage.getItem("userId") + '</font></b> into the id field of the survey. Please be sure to scroll through to complete the entire survey before continuing.</h3></p>';
+    document.body.innerHTML = document.body.innerHTML + '<iframe src="https://qfreeaccountssjc1.az1.qualtrics.com/jfe/form/SV_agwdoI2bOY7EFMi" width="900" height="450" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>';
+    // document.body.innerHTML = document.body.innerHTML + '<h3><br><input type="checkbox" name="done" id="doneCheck">I have submitted.</h3>';
+    document.body.innerHTML = document.body.innerHTML + '<h3>Input the code showed after you submit the survey and then click <b><span class="studyBlue">Continue</span></b> to proceed to next phase.</h3>';
+    document.body.innerHTML = document.body.innerHTML + '<form><input id="txt_submit" type="text" name="test" style="border-radius: 5px; -webkit-border-radius: 5px;" placeholder="Input the code here"><span id="msg"></span></form>';
+    document.body.innerHTML = document.body.innerHTML + '<button type="button" id="continueButton" onclick="show()" class="studyNav">Continue</button>';
+
+    console.log('user id: ', window.localStorage.getItem("userId"));
+
+
+    document.getElementById("continueButton").onclick = function () {
+        var txt_submit = document.getElementById("txt_submit");
+        var strText = txt_submit.value;
+        console.log(strText);
+        if ("6cjh5a" == strText) {
+            var w = window.open("demo.html", "_self");
+        }else alert("You must input the correct code showed at the END of the survey.");
+    };
+
+    history.go(1);
+</script>
+
+</body>
+</html>

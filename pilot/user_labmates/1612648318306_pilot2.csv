@@ -1,0 +1,98 @@
+name,user_label,true_label,ans
+Car 23,Sedan,Minivan,F
+Car 13,Sports Car,Minivan,F
+Car 13,SUV,Minivan,F
+Car 13,Sports Car,Minivan,F
+Car 16,Sports Car,Minivan,F
+Car 49,Sports Car,Minivan,F
+Car 11,Sports Car,Minivan,F
+Car 16,Sports Car,Minivan,F
+Car 3,SUV,Minivan,F
+Car 15,SUV,Minivan,F
+Car 34,SUV,Minivan,F
+Car 3,Wagon,Minivan,F
+Car 37,Wagon,Minivan,F
+Car 9,Wagon,Minivan,F
+Car 16,SUV,Minivan,F
+Car 14,SUV,Minivan,F
+Car 34,SUV,Minivan,F
+Car 11,SUV,Minivan,F
+Car 39,SUV,Minivan,F
+Car 11,Wagon,Minivan,F
+Car 8,Sedan,Minivan,F
+Car 13,Minivan,Minivan,T
+Car 40,Minivan,Minivan,T
+Car 26,Sedan,Minivan,F
+Car 40,Sedan,Minivan,F
+Car 17,Sports Car,Minivan,F
+Car 22,Sedan,Minivan,F
+Car 32,Sedan,Minivan,F
+Car 9,Sports Car,Minivan,F
+Car 38,Sports Car,Minivan,F
+Car 2,Sedan,Minivan,F
+Car 26,SUV,Minivan,F
+Car 5,SUV,Minivan,F
+Car 26,Minivan,Minivan,T
+Car 5,Wagon,Minivan,F
+Car 24,Wagon,Minivan,F
+Car 24,Wagon,Minivan,F
+Car 24,Un-Assign,Minivan,F
+Car 24,Sedan,Minivan,F
+Car 5,Sports Car,Minivan,F
+Car 32,Sports Car,Minivan,F
+Car 43,Wagon,Minivan,F
+Car 39,Minivan,Minivan,T
+Car 45,Wagon,Minivan,F
+Car 2,Sedan,Minivan,F
+Car 22,Minivan,Minivan,T
+Car 32,Wagon,Minivan,F
+Car 6,SUV,Minivan,F
+Car 46,SUV,Minivan,F
+Car 27,Wagon,Minivan,F
+Car 49,Sedan,Minivan,F
+Car 41,Sedan,Minivan,F
+Car 36,Minivan,Minivan,T
+Car 43,Sports Car,Minivan,F
+Car 43,Sedan,Minivan,F
+Car 44,Sedan,Minivan,F
+Dog 64,Shih Tzu,Shih Tzu,T
+Dog 63,Shih Tzu,Shih Tzu,T
+Dog 70,Shih Tzu,Shih Tzu,T
+Dog 70,Shih Tzu,Shih Tzu,T
+Dog 67,Shih Tzu,Shih Tzu,T
+Dog 44,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog 43,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog 47,Shih Tzu,Cavalier King Charles Spaniel,F
+Dog 65,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog 69,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog 61,Shih Tzu,Shih Tzu,T
+Dog 45,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog 50,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog 50,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog 42,Bernedoodle,Cavalier King Charles Spaniel,F
+Player 691,Point Guard,Power Forward,F
+Player 517,Point Guard,Center,F
+Player 347,Point Guard,Center,F
+Player 173,Point Guard,Power Forward,F
+Player 516,Point Guard,Center,F
+Player 424,Point Guard,Power Forward,F
+Player 553,Point Guard,Power Forward,F
+Player 335,Shooting Guard,Small Forward,F
+Player 335,Shooting Guard,Small Forward,F
+Player 335,Shooting Guard,Small Forward,F
+Player 712,Shooting Guard,Shooting Guard,T
+Player 678,Shooting Guard,Center,F
+Player 848,Shooting Guard,Power Forward,F
+Player 632,Small Forward,Point Guard,F
+Player 269,Small Forward,Shooting Guard,F
+Player 361,Small Forward,Shooting Guard,F
+Player 744,Small Forward,Point Guard,F
+Player 649,Small Forward,Power Forward,F
+Player 458,Small Forward,Point Guard,F
+Player 458,Small Forward,Point Guard,F
+Player 458,Small Forward,Point Guard,F
+Player 885,Small Forward,Power Forward,F
+Player 217,Small Forward,Small Forward,T
+Player 860,Small Forward,Point Guard,F
+Player 940,Small Forward,Center,F
+Player 873,Small Forward,Shooting Guard,F

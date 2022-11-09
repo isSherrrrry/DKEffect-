@@ -1,0 +1,24 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="prev_class <= 3.5\ngini = 0.808\nsamples = 595\nvalue = [72, 118, 95, 124, 153, 33]\nclass = Power Forward"] ;
+1 [label="prev_class <= 2.5\ngini = 0.775\nsamples = 410\nvalue = [60, 110, 93, 113, 27, 7]\nclass = Small Forward"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="prev_class <= 1.5\ngini = 0.735\nsamples = 288\nvalue = [58, 103, 86, 15, 19, 7]\nclass = Shooting Guard"] ;
+1 -> 2 ;
+3 [label="prev_class <= 0.5\ngini = 0.65\nsamples = 190\nvalue = [49, 98, 19, 9, 13, 2]\nclass = Shooting Guard"] ;
+2 -> 3 ;
+4 [label="gini = 0.56\nsamples = 73\nvalue = [46, 4, 12, 1, 8, 2]\nclass = Center"] ;
+3 -> 4 ;
+5 [label="gini = 0.344\nsamples = 117\nvalue = [3, 94, 7, 8, 5, 0]\nclass = Shooting Guard"] ;
+3 -> 5 ;
+6 [label="gini = 0.511\nsamples = 98\nvalue = [9, 5, 67, 6, 6, 5]\nclass = Point Guard"] ;
+2 -> 6 ;
+7 [label="gini = 0.344\nsamples = 122\nvalue = [2, 7, 7, 98, 8, 0]\nclass = Small Forward"] ;
+1 -> 7 ;
+8 [label="prev_class <= 5.0\ngini = 0.507\nsamples = 185\nvalue = [12, 8, 2, 11, 126, 26]\nclass = Power Forward"] ;
+0 -> 8 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+9 [label="gini = 0.325\nsamples = 152\nvalue = [7, 7, 2, 11, 124, 1]\nclass = Power Forward"] ;
+8 -> 9 ;
+10 [label="gini = 0.399\nsamples = 33\nvalue = [5, 1, 0, 0, 2, 25]\nclass = Un-Assign"] ;
+8 -> 10 ;
+}

@@ -1,0 +1,25 @@
+name,user_label,true_label,ans
+Dog73,Shih Tzu,Shih Tzu,T
+Dog73,Shih Tzu,Shih Tzu,T
+Dog76,Shih Tzu,Shih Tzu,T
+Dog86,Shih Tzu,American Bulldog,F
+Dog86,Shih Tzu,American Bulldog,F
+Dog86,American Foxhound,American Bulldog,F
+Dog83,American Bulldog,American Bulldog,T
+Dog64,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog61,Bernedoodle,Shih Tzu,F
+Dog61,Bernedoodle,Shih Tzu,F
+Dog61,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog78,Cavalier King Charles Spaniel,Shih Tzu,F
+Dog52,Cavalier King Charles Spaniel,Cavalier King Charles Spaniel,T
+Dog92,American Foxhound,American Bulldog,F
+Dog89,American Bulldog,American Bulldog,T
+Dog84,American Bulldog,American Bulldog,T
+Dog96,American Bulldog,American Bulldog,T
+Dog94,American Foxhound,American Bulldog,F
+Dog90,American Foxhound,American Bulldog,F
+Dog88,American Foxhound,American Bulldog,F
+Dog97,American Foxhound,American Bulldog,F
+Dog48,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog49,Bernedoodle,Cavalier King Charles Spaniel,F
+Dog80,Cavalier King Charles Spaniel,Shih Tzu,F

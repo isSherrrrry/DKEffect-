@@ -1,0 +1,24 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="prev_class <= 2.5\ngini = 0.819\nsamples = 1302\nvalue = [186, 261, 231, 251, 284, 89]\nclass = Power Forward"] ;
+1 [label="prev_class <= 1.5\ngini = 0.737\nsamples = 681\nvalue = [160, 226, 206, 34, 35, 20]\nclass = Shooting Guard"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="prev_class <= 0.5\ngini = 0.655\nsamples = 448\nvalue = [146, 214, 32, 20, 26, 10]\nclass = Shooting Guard"] ;
+1 -> 2 ;
+3 [label="gini = 0.448\nsamples = 189\nvalue = [138, 8, 18, 4, 15, 6]\nclass = Center"] ;
+2 -> 3 ;
+4 [label="gini = 0.358\nsamples = 259\nvalue = [8, 206, 14, 16, 11, 4]\nclass = Shooting Guard"] ;
+2 -> 4 ;
+5 [label="gini = 0.429\nsamples = 233\nvalue = [14, 12, 174, 14, 9, 10]\nclass = Point Guard"] ;
+1 -> 5 ;
+6 [label="prev_class <= 3.5\ngini = 0.698\nsamples = 621\nvalue = [26, 35, 25, 217, 249, 69]\nclass = Power Forward"] ;
+0 -> 6 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+7 [label="gini = 0.358\nsamples = 248\nvalue = [6, 15, 11, 197, 16, 3]\nclass = Small Forward"] ;
+6 -> 7 ;
+8 [label="prev_class <= 5.0\ngini = 0.568\nsamples = 373\nvalue = [20, 20, 14, 20, 233, 66]\nclass = Power Forward"] ;
+6 -> 8 ;
+9 [label="gini = 0.346\nsamples = 284\nvalue = [11, 16, 6, 19, 228, 4]\nclass = Power Forward"] ;
+8 -> 9 ;
+10 [label="gini = 0.491\nsamples = 89\nvalue = [9, 4, 8, 1, 5, 62]\nclass = Un-Assign"] ;
+8 -> 10 ;
+}

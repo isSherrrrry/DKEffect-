@@ -1,0 +1,51 @@
+Player,Player Anonymized,Team,Position,Avg. 3-Pointers Att.,Avg. 3-Pointers Made,Avg. Assists,Avg. Blocks,Avg. Field Goals Att.,Avg. Field Goals Made,Avg. Free Throws Made,Avg. Points,Avg. Steals,Avg. Total Rebounds,Avg. Turnovers,Height (Inches),Weight (Pounds)
+James Harden,269,HOU,Shooting Guard,8,2.9,7.5,0.6,19.7,8.7,8.8,29,1.7,6.1,4.6,77,225
+Jimmy Butler,755,CHI,Shooting Guard,3.1,1,4.8,0.6,15.4,7,5.9,20.9,1.6,5.4,2,79,220
+Ke Caldwell-Pope,196,DET,Shooting Guard,4.8,1.5,1.8,0.2,12.6,5.3,2.4,14.5,1.4,3.7,1.4,77,205
+Gordon Hayward,809,UTA,Shooting Guard,5.1,1.8,3.7,0.3,15,6.5,4.9,19.7,1.2,5,2.5,80,209
+Demar Derozan,169,TOR,Shooting Guard,1.8,0.6,4,0.3,17.7,7.9,7.1,23.5,1.1,4.5,2.2,79,216
+C.J. McCollum,361,POR,Shooting Guard,5.9,2.5,4.3,0.3,17.9,8,2.3,20.8,1.2,3.2,2.5,76,201
+Arron Afflalo,873,NYK,Shooting Guard,3.4,1.3,2,0.1,11.3,5,1.5,12.8,0.4,3.7,1.2,77,216
+Wesley Matthews,849,DAL,Shooting Guard,6.7,2.4,1.9,0.2,10.9,4.2,1.6,12.5,1,3.1,1,77,220
+Victor Oladipo,811,ORL,Shooting Guard,3.9,1.4,3.9,0.8,13.5,5.9,2.8,16,1.6,4.8,2.1,76,214
+Klay Thompson,712,GSW,Shooting Guard,8.1,3.5,2.1,0.6,17.3,8.1,2.4,22.1,0.8,3.8,1.7,79,205
+Kyle Lowry,143,TOR,Point Guard,7.1,2.8,6.4,0.4,15.6,6.6,5.2,21.2,2.1,4.7,2.9,72,205
+John Wall,385,WAS,Point Guard,4.2,1.5,10.3,0.8,17.5,7.4,3.5,19.9,1.9,4.9,4.1,76,209
+Brandon Knight,548,PHO,Point Guard,6.6,2.3,5,0.4,16.9,7,2.9,19.2,1.2,3.8,3.3,75,189
+Damian Lillard,632,POR,Point Guard,8.1,3.1,6.8,0.4,19.7,8.2,5.5,25.1,0.9,4,3.2,75,194
+Rajon Rondo,466,SAC,Point Guard,2.4,0.9,11.6,0.1,10.9,4.9,1.2,11.9,2,6.1,3.9,73,185
+Kemba Walker,744,CHA,Point Guard,6,2.2,5.2,0.5,16.4,7,4.6,20.9,1.6,4.4,2.1,73,184
+Eric Bledsoe,860,PHO,Point Guard,4.2,1.5,6.1,0.6,15.9,7.2,4.5,20.4,2,4,3.6,73,205
+Stephen Curry,118,GSW,Point Guard,11.2,5.1,6.7,0.2,20.2,10.2,4.6,30.1,2.1,5.4,3.3,75,190
+George Hill,458,IND,Point Guard,4.2,1.7,3.5,0.2,10,4.4,1.5,12.1,1.1,4,1.4,74,181
+Russel Westbrook,681,OKL,Point Guard,4.3,1.3,10.4,0.2,18.1,8.2,5.8,23.5,2,7.8,4.3,75,200
+Khris Middleton,653,MIL,Small Forward,4.6,1.8,4.2,0.2,14.5,6.4,3.5,18.2,1.7,3.8,2.3,80,234
+Carmelo Anthony,968,NYK,Small Forward,4.3,1.5,4.2,0.5,18.2,7.9,4.6,21.8,0.9,7.7,2.4,80,236
+Trevor Ariza,923,HOU,Small Forward,6.1,2.3,2.3,0.3,10.6,4.4,1.6,12.7,2,4.5,1.4,80,218
+Nicolas Batum,909,CHA,Small Forward,5.7,2,5.8,0.6,12.5,5.3,2.3,14.9,0.9,6.1,2.9,80,200
+Kevin Durant,335,OKL,Small Forward,6.7,2.6,5,1.2,19.2,9.7,6.2,28.2,0.9,8.2,3.5,81,240
+Lebron James,540,CLE,Small Forward,3.7,1.1,6.7,0.6,18.6,9.7,4.7,25.3,1.4,7.4,3.3,80,250
+Marcus Morris,217,DET,Small Forward,3.7,1.4,2.5,0.3,11.8,5.1,2.5,14.1,0.8,5,1.8,81,236
+Andrew Wiggins,832,MIN,Small Forward,2.3,0.7,2,0.6,16,7.3,5.3,20.7,1,3.6,2.2,80,200
+Danilo Gallinari,618,DEN,Small Forward,4.5,1.6,2.5,0.4,13.2,5.4,7.1,19.5,0.8,5.3,1.5,82,225
+Rudy Gay,108,SAC,Small Forward,3.1,1.1,1.7,0.7,14.4,6.7,2.8,17.2,1.4,6.5,2,80,229
+Anthony Davis,424,NOR,Power Forward,1.8,0.6,1.9,2,18.6,9.2,5.3,24.3,1.3,10.3,2,82,254
+Chris Bosh,885,MIA,Power Forward,4.2,1.5,2.4,0.6,14.5,6.8,4,19.1,0.7,7.4,1.5,83,235
+Blake Griffin,386,LAC,Power Forward,0.5,0.2,4.9,0.5,17.3,8.6,4,21.4,0.8,8.4,2.4,82,251
+Derrick Favors,789,UTA,Power Forward,0.1,0,1.5,1.5,13.1,6.7,2.9,16.4,1.2,8.1,1.7,82,247
+Serge Ibaka,553,OKL,Power Forward,2.4,0.8,0.8,1.9,11.1,5.3,1.2,12.6,0.5,6.8,1.4,82,236
+Paul Millsap,542,ATL,Power Forward,2.9,0.9,3.3,1.7,13.2,6.2,3.8,17.1,1.8,9,2.4,80,247
+Pau Gasol,173,CHI,Power Forward,1,0.3,4.1,2,13.8,6.5,3.2,16.5,0.6,11,2.3,84,254
+Kevin Love,691,CLE,Power Forward,5.7,2.1,2.4,0.5,12.7,5.3,3.4,16,0.8,9.9,1.8,82,251
+Dirk Nowitzki,649,DAL,Power Forward,4.6,1.7,1.8,0.7,14.8,6.6,3.3,18.3,0.7,6.5,1.1,84,245
+Lamarcu Aldridge,848,SAN,Power Forward,0.2,0,1.5,1.1,14.1,7.2,3.5,18,0.5,8.5,1.3,83,240
+Demarcus Cousins,940,SAC,Center,3.2,1.1,3.3,1.4,20.5,9.2,7.3,26.9,1.6,11.5,3.8,83,269
+Marc Gasol,637,MEM,Center,0.1,0,3.8,1.3,13.6,6.3,3.9,16.6,1,7,2.3,85,265
+Deandre Jordan,517,LAC,Center,0,0,1.2,2.3,6.6,4.6,3.5,12.7,0.7,13.8,1.4,83,265
+Brook Lopez,284,BRO,Center,0.2,0,2,1.7,15.8,8.1,4.3,20.6,0.8,7.9,2.4,84,265
+Andre Drummond,325,DET,Center,0.1,0,0.8,1.4,13.1,6.8,2.6,16.2,1.5,14.8,1.9,84,280
+Dwight Howard,275,HOU,Center,0.1,0,1.4,1.6,8.5,5.2,3.3,13.7,1,11.8,2.3,83,265
+Rudy Gobert,678,UTA,Center,0,0,1.5,2.1,5.8,3.2,2.6,9.1,0.7,11,1.9,85,245
+Karl-Anthony Towns,516,MIN,Center,1.1,0.4,2,1.7,14,7.6,2.7,18.3,0.7,10.4,2.2,84,247
+Nikola Vucevic,253,ORL,Center,0.1,0,2.8,1.1,16.1,8.2,1.7,18.2,0.8,8.8,1.9,84,260
+Marcin Gortat,347,WAS,Center,0,0,1.4,1.3,10.2,5.8,1.9,13.5,0.6,9.9,1.6,83,240
