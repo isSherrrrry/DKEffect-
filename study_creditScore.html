@@ -21,7 +21,7 @@
 	<script src="lib/ial.js"></script>
 	<link rel="stylesheet" href="lib/bootstrap.min.css">
 
-	<script src='js/scatter-plot_dog.js'></script>
+	<script src='js/scatter-plot_credit.js'></script>
 	<script src='js/axis.js'></script>
 	<script src='js/para-coord.js'></script>
 	<script src='js/main_creditScore.js'></script>
@@ -30,7 +30,6 @@
 </head>
 
 <body onload="init()">
-<!-- init() method defined in main.js-->
 <div id="dialog" title="Basic dialog">
 	<h3>Select the initial X and Y dimensions for the scatterplot view in the user study.</h3>
 
@@ -39,21 +38,18 @@
 		
 		<select id="initX">
 			<option value="Age" selected="selected">Age</option>
-			<option value="Occupation">Occupation</option>
 			<option value="Annual_Income">Annual Income</option>
 			<option value="Num_Bank_Accounts">Number of Bank Accounts</option>
 			<option value="Num_Credit_Card">Number of Credit Cards</option>
 			<option value="Credit_History_Age">Credit History Age</option>
 			<option value="Interest_Rate">Interest Rate</option>
 			<option value="Num_of_Loan">Number of Loans</option>
-			<option value="Type_of_Loan">Type of Loan</option>
 			<option value="Delay_from_due_date">Delay from Due Date</option>
 			<option value="Num_of_Delayed_Payment">Number of Delayed Payments</option>
 			<option value="Num_Credit_Inquiries">Number of Credit Inquiries</option>
 			<option value="Outstanding_Debt">Outstanding Debts</option>
 			<option value="Credit_Utilization_Ratio">Credit Utilization Ratio</option>
 			<option value="Amount_invested_monthly">Amount Invested Monthly</option>
-			<option value="Payment_Behaviour">Payment Behaviour</option>
 			<option value="Monthly_Balance" >Monthly Balance</option>
 		</select>
 
@@ -61,27 +57,24 @@
 	<h5>Select Initial Y Dimension:
 		<select id="initY">
 			<option value="Age" selected="selected">Age</option>
-			<option value="Occupation">Occupation</option>
 			<option value="Annual_Income">Annual Income</option>
 			<option value="Num_Bank_Accounts">Number of Bank Accounts</option>
 			<option value="Num_Credit_Card">Number of Credit Cards</option>
 			<option value="Credit_History_Age">Credit History Age</option>
 			<option value="Interest_Rate">Interest Rate</option>
 			<option value="Num_of_Loan">Number of Loans</option>
-			<option value="Type_of_Loan">Type of Loan</option>
 			<option value="Delay_from_due_date">Delay from Due Date</option>
 			<option value="Num_of_Delayed_Payment">Number of Delayed Payments</option>
 			<option value="Num_Credit_Inquiries">Number of Credit Inquiries</option>
 			<option value="Outstanding_Debt">Outstanding Debts</option>
 			<option value="Credit_Utilization_Ratio">Credit Utilization Ratio</option>
 			<option value="Amount_invested_monthly">Amount Invested Monthly</option>
-			<option value="Payment_Behaviour">Payment Behaviour</option>
 			<option value="Monthly_Balance">Monthly Balance</option>
 		</select>
 	</h5>
 	<br><br>
-<!--	<h4>Click <span class="studyBlue">Continue</span> below to proceed.</h4>-->
-<!--	<input name="doneButton" type="button" value="Continue" id="doneButton" class="studyNav" />-->
+	<h4>Click <span class="studyBlue">Continue</span> below to proceed.</h4>
+	<input name="doneButton" type="button" value="Continue" id="doneButton" class="studyNav" />
 </div>
 
 <div class="row" id="area1" style="overflow:hidden;">

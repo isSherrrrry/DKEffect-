@@ -263,8 +263,8 @@ function addClassificationControls(data) {
 
 
 	// listen for user to hit Continue
-	var x = Math.floor((Math.random() * 10) + 1);
-	console.log(x);
+	// var x = Math.floor((Math.random() * 10) + 1);
+	// console.log(x);
 	$("#continueButton").click(function () {
 		// var x = Math.floor((Math.random() * 10) + 1);
 		// console.log(x);
@@ -287,13 +287,13 @@ function addClassificationControls(data) {
 						// var x = Math.floor((Math.random() * 10) + 1);
 						// console.log(x);
 						// document.getElementById('continueButton').onclick = function () {
-							if (x % 2 == 0) {
-								localStorage.setItem('first_task', 'bball');
-								var w = window.open('custom_axis_bball.html', '_self');
-							} else {
-								localStorage.setItem('first_task', 'dog');
-								var w = window.open('custom_axis_dog.html', '_self');
-							};
+							// if (x % 2 == 0) {
+								localStorage.setItem('first_task', 'credit');
+								var w = window.open('custom_axis_credit.html', '_self');
+							// } else {
+							// 	localStorage.setItem('first_task', 'dog');
+							// 	var w = window.open('custom_axis_dog.html', '_self');
+							// };
 						// };
 						//disable back button
 						history.go(1);
@@ -303,13 +303,13 @@ function addClassificationControls(data) {
 				// var x = Math.floor((Math.random() * 10) + 1);
 				// console.log(x);
 				// document.getElementById('continueButton').onclick = function () {
-					if (x % 2 == 0) {
-						localStorage.setItem('first_task', 'bball');
-						var w = window.open('custom_axis_bball.html', '_self');
-					} else {
-						localStorage.setItem('first_task', 'dog');
-						var w = window.open('custom_axis_dog.html', '_self');
-					};
+					// if (x % 2 == 0) {
+						localStorage.setItem('first_task', 'credit');
+						var w = window.open('custom_axis_credit.html', '_self');
+					// } else {
+					// 	localStorage.setItem('first_task', 'dog');
+					// 	var w = window.open('custom_axis_credit.html', '_self');
+					// };
 				// };
 				//disable back button
 				history.go(1);

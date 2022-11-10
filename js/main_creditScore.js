@@ -36,7 +36,6 @@ function getInitY() {
 }
 
 
-//Gets called when the page is loaded.
 function init() {
 	defaultX = $("#initX :selected").text();
 	defaultY = $("#initY :selected").text();
@@ -55,7 +54,7 @@ function loadData() {
 		var loaddata = jQuery.extend(true, [], data);
 		for (var i = 0; i < loaddata.length; i++) {
 			loaddata[i]["name"] = "Name: " + loaddata[i]["Customer_id"];
-			delete loaddata[i]["Customer_ID"];
+			delete loaddata[i]["Customer ID"];
 			delete loaddata[i]["Name"];
 			playerPositionMap[loaddata[i]["name"]] = "none";
 			loaddata[i]["coord"] = {};
@@ -147,9 +146,9 @@ function loadVis(data) {
 // }
 
 function addHelp() {
-	var tooltipText = '<div class="qtip-dark"><b>Task:</b> Your task is to classify all of the points in the scatterplot. Each <i>circle</i> in the scatterplot represents a <i>dog</i>. Color each circle according to the <i>breed</i> you think the dog belongs to.';
+	var tooltipText = '<div class="qtip-dark"><b>Task:</b> Your task is to classify all of the points in the scatterplot. Each <i>circle</i> in the scatterplot represents a <i> candidate and their credit score</i>. Color each circle according to the <i>breed</i> you think the credit score belongs to.';
 	tooltipText += '<br><br>';
-	tooltipText += '<b>Note:</b> Each attribute is evaluated on a scale ranging from <b>1</b> to <b>5</b>. The <i>higher</i> the number, the <i>more obvious</i> the characteristics. For example, if a dog has a value of 1 in <i>Adapts Well to Apartment Living</i>, it means that among the five dog breeds, it cannot adapt well to apartment living. If the value is 5, it means that it can adapt very well to the apartment living.';
+	tooltipText += '<b>Note:</b> Each attribute is evaluated on a scale ranging from <b>good</b> to <b>poor</b>';
 	tooltipText += '<br><br>';
 	tooltipText += '<b>Interactions:</b> <ul>';
 	tooltipText += '<li><i>See Details</i> about a point by <i>Hovering</i> over it. Details will be shown in the text on the right.</li>';
@@ -186,7 +185,7 @@ function addHelp() {
 		// get the x,y coordinates of all the points on the graph to log
 		var data_locations = [];
 		d3.select("#SC").selectAll("circle").each(function (d) {
-			var pt_log = { dog: d.name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
+			var pt_log = { credit: d.name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
 			data_locations.push(pt_log);
 		});
 
@@ -218,11 +217,11 @@ function addClassificationControls(data) {
 			// get the x,y coordinates of all the points on the graph to log
 			var data_locations = [];
 			d3.select("#SC").selectAll("circle").each(function (d) {
-				var pt_log = { dog: d.name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
+				var pt_log = { credit: d.name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
 				data_locations.push(pt_log);
 			});
 
-			ial.logging.log('category_' + activePosition, undefined, 'CategoryClick', { 'level': 'INFO', 'taskType': 'dog', 'eventType': 'category_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+			ial.logging.log('category_' + activePosition, undefined, 'CategoryClick', { 'level': 'INFO', 'taskType': 'credit', 'eventType': 'category_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
 
 			//LE.log(JSON.stringify(ial.logging.peek()));
 			R7Insight.log(JSON.stringify(ial.logging.peek()));
@@ -234,11 +233,11 @@ function addClassificationControls(data) {
 			// get the x,y coordinates of all the points on the graph to log
 			var data_locations = [];
 			d3.select("#SC").selectAll("circle").each(function (d) {
-				var pt_log = { dog: d.Name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
+				var pt_log = { credit: d.Name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
 				data_locations.push(pt_log);
 			});
 
-			ial.logging.log('category_' + activePosition, undefined, 'CategoryDoubleClick', { 'level': 'INFO', 'taskType': 'dog', 'eventType': 'category_double_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+			ial.logging.log('category_' + activePosition, undefined, 'CategoryDoubleClick', { 'level': 'INFO', 'taskType': 'credit', 'eventType': 'category_double_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
 			// LE.log(JSON.stringify(ial.logging.peek()));
 			R7Insight.log(JSON.stringify(ial.logging.peek()));
 		});
@@ -255,7 +254,6 @@ function addClassificationControls(data) {
 
 	// listen for user to hit Continue
 	$("#continueButton").click(function () {
-
 		if (document.getElementById('doneCheck').checked) {
 			var allClassified = true;
 			var howMany = 0;
@@ -266,7 +264,7 @@ function addClassificationControls(data) {
 				}
 			}
 			var prevURL = document.referrer;
-			if (localStorage.getItem("first_task") == 'dog') {
+			if (localStorage.getItem("first_task") != 'credit') {
 				if (!allClassified) {
 					if ((data.length - howMany) <= (data.length * 0.8)) {
 						var userResp = alert("Please classify more points.");
@@ -327,16 +325,16 @@ function drawScatterPlot(data) {
 	// get the x,y coordinates of all the points on the graph to log
 	var data_locations = [];
 	d3.select("#SC").selectAll("circle").each(function (d) {
-		var pt_log = { dog: d.name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
+		var pt_log = { credit: d.name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
 		data_locations.push(pt_log);
 	});
 
 	//update IAL weight vector
-	ial.usermodel.setAttributeWeightVector(V1, true, { 'level': 'INFO', 'taskType': 'dog', 'eventType': 'set_attribute_weight_vector_init', 'whichAxis': 'X', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+	ial.usermodel.setAttributeWeightVector(V1, true, { 'level': 'INFO', 'taskType': 'credit', 'eventType': 'set_attribute_weight_vector_init', 'whichAxis': 'X', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
 
 	R7Insight.log(JSON.stringify(ial.logging.peek()));
 	//LE.log(JSON.stringify(ial.logging.peek()));
-	ial.usermodel.setAttributeWeightVector(V2, true, { 'level': 'INFO', 'taskType': 'dog', 'eventType': 'set_attribute_weight_vector_init', 'whichAxis': 'Y', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+	ial.usermodel.setAttributeWeightVector(V2, true, { 'level': 'INFO', 'taskType': 'credit', 'eventType': 'set_attribute_weight_vector_init', 'whichAxis': 'Y', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
 
 	// LE.log(JSON.stringify(ial.logging.peek()));
 	R7Insight.log(JSON.stringify(ial.logging.peek()));

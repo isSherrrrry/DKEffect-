@@ -260,3 +260,6 @@ circle:click {
   top: 100%;
   left: 0;
 }
+#drop{
+  display: none;
+}
