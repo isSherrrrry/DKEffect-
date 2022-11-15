@@ -166,10 +166,6 @@ function addHelp() {
 	tooltipText += '<li><i>Classify a Point</i> on the scatterplot by <i>Clicking</i> on it while its vehicle type is activated.</li>';
 	tooltipText += '<li><i>Un-Assign a Point</i> on the scatterplot by <i>Clicking</i> on it while "Un-Assign" is activated.</li>';
 	tooltipText += '<li><i>Change the Axes</i> by <i>Selecting</i> a new variable from the drop-down on the X or Y axes.</li>';
-	tooltipText += '<li><i>Define a Custom Axis</i> by <i>Dragging</i> points from the scatterplot to the bins along the X-Axis.</li>';
-	tooltipText += '<li><i>Remove a Point from a Bin</i> on the X-Axis by <i>Double Clicking</i> the point inside the bin.</li>';
-	tooltipText += '<li><i>Reset the X-Axis</i> to the default by <i>Clicking</i> the "Clear X" button to clear both bins and change it to the default dimension.</li>';
-	tooltipText += '<li><i>Change the Weight of an Attribute</i> along the X-Axis by <i>Dragging</i> the bars to manually change the weight.</li>';
 	tooltipText += '</ul>';
 	tooltipText += '<br>';
 	tooltipText += 'Try to classify all points in the scatterplot to complete the study. When ready to continue, check the box in bottom right and press <strong><i>Continue</i></strong> to proceed to the next phase of the study.';

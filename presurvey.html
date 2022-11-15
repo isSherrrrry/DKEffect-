@@ -22,19 +22,13 @@
     document.body.innerHTML = document.body.innerHTML + '<iframe src="https://emorycollege.co1.qualtrics.com/jfe/form/SV_eJ02rOjxcLBWakm" width="900" height="450" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>';
     // document.body.innerHTML = document.body.innerHTML + '<h3><br><input type="checkbox" name="done" id="doneCheck">I have submitted.</h3>';
     document.body.innerHTML = document.body.innerHTML + '<h3>Input the code showed after you submit the survey and then click <b><span class="studyBlue">Continue</span></b> to proceed to next phase.</h3>';
-    document.body.innerHTML = document.body.innerHTML + '<form><input id="txt_submit" type="text" name="test" style="border-radius: 5px; -webkit-border-radius: 5px;" placeholder="Input the code here"><span id="msg"></span></form>';
     document.body.innerHTML = document.body.innerHTML + '<button type="button" id="continueButton" onclick="show()" class="studyNav">Continue</button>';
 
     console.log('user id: ', window.localStorage.getItem("userId"));
 
 
     document.getElementById("continueButton").onclick = function () {
-        var txt_submit = document.getElementById("txt_submit");
-        var strText = txt_submit.value;
-        console.log(strText);
-        if ("6cjh5a" == strText) {
-            var w = window.open("demo.html", "_self");
-        }else alert("You must input the correct code showed at the END of the survey.");
+        var w = window.open("demo.html", "_self");
     };
 
     history.go(1);
