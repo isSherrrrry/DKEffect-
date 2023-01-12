@@ -3,6 +3,8 @@
   <meta charset="UTF-8">
   <title>InterAxis</title>
 
+  <script src="js/webgazer.js"></script>
+
   <script src='lib/d3.v3.js'></script>
   <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
   <script src="https://d3js.org/d3-color.v1.min.js"></script>
@@ -119,6 +121,15 @@
 		history.pushState(null, null, document.URL);
 	});
 	history.go(1);
+  </script>
+
+  <script>
+	window.webgazer.begin();
+	window.webgazer.setGazeListener(function(event){
+		console.log(event);
+	}).begin();
+
+	
   </script>
 
 </body>
