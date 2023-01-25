@@ -103,7 +103,7 @@ function loadData() {
 		// initialize rapid7
 
 		R7Insight.init({
-			token: 'a1826609-f773-490c-886f-933fa99c872c',
+			token: 'd51a6564-1a20-435f-afef-41806a4bc4cb',
 			region: 'us3'
 		});
 		// log something

@@ -114,8 +114,8 @@ function loadData() {
 
 		// initialize rapid7
 		R7Insight.init({
-			token: 'c6c20374-dd3f-4e21-85eb-92511d44a767',
-			region: 'us'
+			token: 'd51a6564-1a20-435f-afef-41806a4bc4cb',
+			region: 'us3'
 		});
 		// log something
 		R7Insight.log("This is a log event");
