@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<title>InterAxis</title>
 
+	<script src="js/webgazer.js"></script>
+	<script src="js/localforage.min.js"></script>
 
 	<script src="lib/d3.v3.js"></script>
 	<script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
@@ -30,6 +32,8 @@
 </head>
 
 <body onload="init()">
+	<div style="top:0;height: 100vh; width: 100% !important; position: absolute; z-index: 100000000000000 !important; background-color: rgb(223,223,223); ">
+
 <div id="dialog" title="Basic dialog">
 	<h3>Select the initial X and Y dimensions for the scatterplot view in the user study.</h3>
 
@@ -78,7 +82,7 @@
 </div>
 
 <div class="row" id="area1" style="overflow:hidden;">
-	<div class="col-md-8" id="scplot">
+	<div class="col-md-8" id="scplot" style="width: 80vw; height: 110%;">
 		<div id="btnXc" style="position: absolute">
 			<!-- <input name="updateButton" type="button" value="Clear Bins" onclick="clearDropzone(&quot;X&quot;)" /> -->
 		</div>
@@ -105,6 +109,7 @@
 		</div>
 	</div>
 </div>
+</div>
 <!--<div class="row" id="area2">-->
 <!--	 <div id="pcplot" class="chart"></div> -->
 </div>
@@ -122,6 +127,25 @@
 	});
 	history.go(1);
 </script>
+
+<script>
+	var data = [];
+	var userId = window.localStorage.getItem("userId");
+
+	// initialize rapid7
+	R7Insight.init({
+		token: '',
+		region: 'us'
+	});
+	
+	window.webgazer.begin();
+	window.webgazer.setGazeListener(function(event){
+		data = JSON.stringify({userID: userId, data: event});
+		R7Insight.log(data);
+	}).begin();
+
+</script>
+
 
 
 </body>

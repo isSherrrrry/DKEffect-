@@ -29,78 +29,84 @@
 </head>
 
 <body onload="init()">
-	<!-- init() method defined in main.js -->
-	<div id="dialog" title="Basic dialog">
-		<h3>Select the initial X and Y dimensions for the scatterplot view in the user study.</h3>
-		<br><br>
-		<h5>Select Initial X Dimension:
-			<select id="initX">
-				<option value="a3pa">AWD</option>
-				<option value="a3pm">RWD</option>
-				<option value="aa">Retail Price</option>
-				<option value="ab">Dealer Price</option>
-				<option value="afga">Engine Size (l)</option>
-				<option value="afgm">Cylinders</option>
-				<option value="afta">HP</option>
-				<option value="aftm">City MPG</option>
-				<option value="am">Hwy MPG</option>
-				<option value="apf">Weight</option>
-				<option value="ap">Wheel Base</option>
-				<option value="aor">Len</option>
-				<option value="as">Width</option>
-			</select>
+	<div style="top:0;height: 100vh; width: 100% !important; position: absolute; z-index: 100000000000000 !important; background-color: rgb(223,223,223); ">
+
+	<div>
+		<div id="dialog" title="Basic dialog">
+			<h3>Select the initial X and Y dimensions for the scatterplot view in the user study.</h3>
 			<br><br>
-			Select Initial Y Dimension:
-			<select id="initY">
-				<option value="a3pa">AWD</option>
-				<option value="a3pm">RWD</option>
-				<option value="aa">Retail Price</option>
-				<option value="ab">Dealer Price</option>
-				<option value="afga">Engine Size (l)</option>
-				<option value="afgm">Cylinders</option>
-				<option value="afta">HP</option>
-				<option value="aftm">City MPG</option>
-				<option value="am">Hwy MPG</option>
-				<option value="apf">Weight</option>
-				<option value="ap">Wheel Base</option>
-				<option value="aor">Len</option>
-				<option value="as">Width</option>
-			</select>
-		</h5>
-		<br><br>
-		<h4>Click <span class="studyBlue">Continue</span> below to proceed.</h4>
-		<input name="doneButton" type="button" value="Continue" id="doneButton" class="studyNav" />
-	</div>
-	<div class="row" id="area1" style="overflow:hidden;">
-		<div class="col-md-8" id="scplot">
-			<div id="btnXc" style="position: absolute">
-			</div>
-			<div style="text-align: center; word-wrap: break-word;">
-				<img id="helpButton" src="img/help.png" style="width: 25px; height: 25px; float: left;">
-				<h5 id="instructions" style="float: right;"><b>Using the data provided about the cars, color each circle
-						in the scatterplot by which type of car you think it is.</b></h5>
-			</div>
-			<select id="cbY" name="cbY" onchange="updatebycb(&quot;Y&quot;,value);"
-				style="position: absolute; width: 100px"></select>
-			<select id="cbX" onchange="updatebycb(&quot;X&quot;,value);"
-				style="position: absolute; width: 175px"></select>
+			<h5>Select Initial X Dimension:
+				<select id="initX">
+					<option value="a3pa">AWD</option>
+					<option value="a3pm">RWD</option>
+					<option value="aa">Retail Price</option>
+					<option value="ab">Dealer Price</option>
+					<option value="afga">Engine Size (l)</option>
+					<option value="afgm">Cylinders</option>
+					<option value="afta">HP</option>
+					<option value="aftm">City MPG</option>
+					<option value="am">Hwy MPG</option>
+					<option value="apf">Weight</option>
+					<option value="ap">Wheel Base</option>
+					<option value="aor">Len</option>
+					<option value="as">Width</option>
+				</select>
+				<br><br>
+				Select Initial Y Dimension:
+				<select id="initY">
+					<option value="a3pa">AWD</option>
+					<option value="a3pm">RWD</option>
+					<option value="aa">Retail Price</option>
+					<option value="ab">Dealer Price</option>
+					<option value="afga">Engine Size (l)</option>
+					<option value="afgm">Cylinders</option>
+					<option value="afta">HP</option>
+					<option value="aftm">City MPG</option>
+					<option value="am">Hwy MPG</option>
+					<option value="apf">Weight</option>
+					<option value="ap">Wheel Base</option>
+					<option value="aor">Len</option>
+					<option value="as">Width</option>
+				</select>
+			</h5>
+			<br><br>
+			<h4>Click <span class="studyBlue">Continue</span> below to proceed.</h4>
+			<input name="doneButton" type="button" value="Continue" id="doneButton" class="studyNav" />
 		</div>
-		<div class="col-md-2" id="area3">
-			<div id="datapanel" class="table" width="150"></div>
-			<div id="datapanel2" class="table" width="150"></div>
-			<div id="datapanel3" class="table" width="150"></div>
-			<div id="datapanel4" class="table" width="150">
-				<form>
-					<input type="checkbox" name="done" id="doneCheck"><span style="font-size:12px;">I am finished.
-						<br>Click <span class="studyBlue">Continue</span> to proceed.</span>
-				</form>
-				<button type="button" id="continueButton" class="studyNav">Continue</button>
+		<div class="row" id="area1" style="overflow:hidden;">
+			<div class="col-md-8" id="scplot" style="width: 80vw; height: 110%;">
+				<div id="btnXc" style="position: absolute">
+				</div>
+				<div style="text-align: center; word-wrap: break-word;">
+					<img id="helpButton" src="img/help.png" style="width: 25px; height: 25px; float: left;">
+					<h5 id="instructions" style="float: right;"><b>Using the data provided about the cars, color each circle
+							in the scatterplot by which type of car you think it is.</b></h5>
+				</div>
+				<select id="cbY" name="cbY" onchange="updatebycb(&quot;Y&quot;,value);"
+					style="position: absolute; width: 100px"></select>
+				<select id="cbX" onchange="updatebycb(&quot;X&quot;,value);"
+					style="position: absolute; width: 175px"></select>
+			</div>
+			<div class="col-md-2" id="area3">
+				<div id="datapanel" class="table" width="150"></div>
+				<div id="datapanel2" class="table" width="150"></div>
+				<div id="datapanel3" class="table" width="150"></div>
+				<div id="datapanel4" class="table" width="150">
+					<form>
+						<input type="checkbox" name="done" id="doneCheck"><span style="font-size:12px;">I am finished.
+							<br>Click <span class="studyBlue">Continue</span> to proceed.</span>
+					</form>
+					<button type="button" id="continueButton" class="studyNav">Continue</button>
+				</div>
 			</div>
 		</div>
+		<div class="row" id="area2">
+			<!-- <div id="pcplot" class="chart"></div> -->
+		</div>
 	</div>
-	<div class="row" id="area2">
-		<!-- <div id="pcplot" class="chart"></div> -->
 	</div>
+
+
 	<script language="javascript" type="text/javascript">
 		// var x = Math.floor((Math.random() * 10) + 1);
 		// console.log(x);
@@ -118,13 +124,23 @@
 	</script>
 
 	<script>
+		var data = [];
+		var userId = window.localStorage.getItem("userId");
+
+		// initialize rapid7
+		R7Insight.init({
+			token: '',
+			region: 'us'
+		});
+		
 		window.webgazer.begin();
 		window.webgazer.setGazeListener(function(event){
-			console.log(event);
+			data = JSON.stringify({userID: userId, data: event});
+			R7Insight.log(data);
 		}).begin();
 
-		
 	</script>
+
 </body>
 
 </html>
