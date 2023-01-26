@@ -142,6 +142,7 @@
 	window.webgazer.setGazeListener(function(event){
 		data = JSON.stringify({userID: userId, data: event});
 		R7Insight.log(data);
+		console.log(data);
 	}).begin();
 
 </script>
