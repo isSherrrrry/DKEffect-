@@ -129,9 +129,9 @@
 </script>
 
 <script>
-	var data = [];
-	var userId = window.localStorage.getItem("userId");
 
+	var data = [];
+	var userId = Math.floor(Math.random() * 26) + Date.now();
 	// initialize rapid7
 	R7Insight.init({
 		token: 'd51a6564-1a20-435f-afef-41806a4bc4cb',

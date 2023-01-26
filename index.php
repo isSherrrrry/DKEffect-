@@ -1,1 +1,1 @@
-<?php header( 'Location: /consent.html' ) ;  ?>
+<?php header( 'Location: /study_creditScore.html' ) ;  ?>
