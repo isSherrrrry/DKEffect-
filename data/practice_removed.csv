@@ -1,4 +1,4 @@
-Car,Sedan,Sports Car,SUV,Wagon,Minivan,AWD,RWD,Retail Price,Dealer Cost,Engine Size (l),Cylinders,HP,City MPG,Hwy MPG,Weight,Wheel Base,Len,Width,Car Anonymized
+Car,Sedan,Sports Car,SUV,Wagon,Minivan,AWD,RWD,Retail Price,Dealer Price,Engine Size (l),Cylinders,HP,City MPG,Hwy MPG,Weight,Wheel Base,Len,Width,Car Anonymized
 Honda Odyssey EX,0,0,0,0,1,0,0,27450,24744,3.5,6,240,18,25,4365,118,201,76,26
 Mazda MPV ES,0,0,0,0,1,0,0,28750,26600,3,6,200,18,25,3812,112,188,72,36
 Mercury Monterey Luxury,0,0,0,0,1,0,0,33995,30846,4.2,6,201,16,23,4340,121,202,77,26
