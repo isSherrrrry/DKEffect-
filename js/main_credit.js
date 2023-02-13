@@ -259,11 +259,11 @@ function addClassificationControls(data) {
 					} else {
 						var userResp = confirm(howMany + " out of " + data.length + " points have not been classified yet. Are you sure you want to continue?");
 						if (userResp) { // user wants to continue anyway
-							var w = window.open("ending.html", "_self");
+							var w = window.open("custom_axis_car.html", "_self");
 						}
 					}
 				} else {
-					var w = window.open("ending.html", "_self");
+					var w = window.open("custom_axis_car.html", "_self");
 					window.localStorage.setItem("userId", window.localStorage.getItem("userId"));
 					window.localStorage.setItem("whichCondition", window.localStorage.getItem("whichCondition"));
 				}
@@ -274,11 +274,11 @@ function addClassificationControls(data) {
 					} else {
 						var userResp = confirm(howMany + " out of " + data.length + " points have not been classified yet. Are you sure you want to continue?");
 						if (userResp) { // user wants to continue anyway
-							var w = window.open("ending.html", "_self");
+							var w = window.open("custom_axis_car.html", "_self");
 						}
 					}
 				} else {
-					var w = window.open("ending.html", "_self");
+					var w = window.open("custom_axis_car.html", "_self");
 					window.localStorage.setItem("userId", window.localStorage.getItem("userId"));
 					window.localStorage.setItem("whichCondition", window.localStorage.getItem("whichCondition"));
 				}
