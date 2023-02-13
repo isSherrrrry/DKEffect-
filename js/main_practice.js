@@ -279,7 +279,7 @@ function addClassificationControls(data) {
 						// document.getElementById('continueButton').onclick = function () {
 							// if (x % 2 == 0) {
 								localStorage.setItem('first_task', 'credit');
-								var w = window.open('ending.html', '_self');
+								var w = window.open('postsurvey.html', '_self');
 							// } else {
 							// 	localStorage.setItem('first_task', 'dog');
 							// 	var w = window.open('custom_axis_dog.html', '_self');
@@ -295,7 +295,7 @@ function addClassificationControls(data) {
 				// document.getElementById('continueButton').onclick = function () {
 					// if (x % 2 == 0) {
 						localStorage.setItem('first_task', 'credit');
-						var w = window.open('ending.html', '_self');
+						var w = window.open('postsurvey.html', '_self');
 					// } else {
 					// 	localStorage.setItem('first_task', 'dog');
 					// 	var w = window.open('custom_axis_credit.html', '_self');
