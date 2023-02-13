@@ -22,10 +22,10 @@
     <script src="lib/ial.js"></script>
     <link rel="stylesheet" href="lib/bootstrap.min.css">
 
-    <script src='js/scatter-plot_dog.js'></script>
+    <script src='js/scatter-plot_practice.js'></script>
     <script src='js/axis.js'></script>
     <script src='js/para-coord.js'></script>
-    <script src='js/main_dog.js'></script>
+    <script src='js/main_practice.js'></script>
     <link rel="stylesheet" type="text/css" href="css/my-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.qtip.min.css">
 
@@ -84,8 +84,8 @@
             var indexY = mySelectY.selectedIndex;
             var defaultX = mySelectX.options[indexX].text;
             var defaultY = mySelectY.options[indexY].text;
-            localStorage.setItem('defaultX_car', defaultX);
-            localStorage.setItem('defaultY_car', defaultY);
+            window.localStorage.setItem('defaultX_car', defaultX);
+            window.localStorage.setItem('defaultY_car', defaultY);
             var w = window.open("study_car.html", "_self");
         };
 

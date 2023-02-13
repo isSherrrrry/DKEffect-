@@ -74,7 +74,7 @@
 			<input name="doneButton" type="button" value="Continue" id="doneButton" class="studyNav" />
 		</div>
 		<div class="row" id="area1" style="overflow:hidden;">
-			<div class="col-md-8" id="scplot" style="width: 80vw; height: 110%;">
+			<div class="col-md-8" id="scplot" >
 				<div id="btnXc" style="position: absolute">
 				</div>
 				<div style="text-align: center; word-wrap: break-word;">
@@ -96,7 +96,7 @@
 						<input type="checkbox" name="done" id="doneCheck"><span style="font-size:12px;">I am finished.
 							<br>Click <span class="studyBlue">Continue</span> to proceed.</span>
 					</form>
-					<button type="button" id="continueButton" class="studyNav">Continue</button>
+					<button type="button" id="continueButton" class="studyNav" onclick="console.save(allData2)">Continue</button>
 				</div>
 			</div>
 		</div>
@@ -111,6 +111,32 @@
 		// var x = Math.floor((Math.random() * 10) + 1);
 		// console.log(x);
 		console.log('user id: ', window.localStorage.getItem("userId"));
+
+		(function(console){
+	console.save = function(data, filename){
+
+		if(!data) {
+			console.error('Console.save: No data')
+			return;
+		}
+
+		if(!filename) filename = 'console.json'
+
+		if(typeof data === "object"){
+			data = JSON.stringify(data, undefined, 4)
+		}
+
+		var blob = new Blob([data], {type: 'text/json'}),
+			e    = document.createEvent('MouseEvents'),
+			a    = document.createElement('a')
+
+		a.download = filename
+		a.href = window.URL.createObjectURL(blob)
+		a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':')
+		e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+		a.dispatchEvent(e)
+	}
+	})(console)
 		if (window.localStorage.getItem("userId") == null || window.localStorage.getItem("whichCondition") == null) {
 			alert("Error: No user id found. To participate in the study, you must indicate consent first.");
 			var w = window.open("consent.html", "_self");
@@ -123,23 +149,52 @@
 		history.go(1);
 	</script>
 
-	<script>
-		var data = [];
-		var userId = window.localStorage.getItem("userId");
+<script>
 
-		// initialize rapid7
-		R7Insight.init({
-			token: 'd51a6564-1a20-435f-afef-41806a4bc4cb',
-			region: 'us3'
-		});
+	var data = [];
+	
+	var userId = Math.floor(Math.random() * 26) + Date.now();
+	// initialize rapid7
+	R7Insight.init({
+		token: 'd51a6564-1a20-435f-afef-41806a4bc4cb',
+		region: 'us3'
+	});
+	window.webgazer.begin();
+	window.webgazer.setGazeListener(function(event){
+		var currentdate = new Date(); 
+		var datetime = currentdate.getHours() + ":"  
+					+ currentdate.getMinutes() + ":" 
+					+ currentdate.getSeconds() + ":"
+					+ currentdate.getMilliseconds();
+		newData = ["x: " + event["x"] + "y: " + event["y"]];
+		data = JSON.stringify({userID: userId, time:datetime, data: newData});
+		allData2.push(data);
 		
-		window.webgazer.begin();
-		window.webgazer.setGazeListener(function(event){
-			data = JSON.stringify({userID: userId, data: event});
-			R7Insight.log(data);
-		}).begin();
+	}).begin();
 
-	</script>
+	document.addEventListener('click', printMousePos, true);
+
+	function printMousePos() {
+		var cursorX;
+		var cursorY;
+		
+		document.onmousemove = function(e){
+			var currentdate = new Date(); 
+		var datetime = currentdate.getHours() + ":"  
+					+ currentdate.getMinutes() + ":" 
+					+ currentdate.getSeconds() + ":"
+					+ currentdate.getMilliseconds();
+		cursorX = e.pageX;
+		cursorY = e.pageY;
+		var dataClick = [];
+		dataClick = ["dataclick " + "x: " + cursorX + " y: " + cursorY + " date: " + datetime];
+		allData2.push(dataClick);
+	}
+	
+	
+	}
+</script>
+
 
 </body>
 

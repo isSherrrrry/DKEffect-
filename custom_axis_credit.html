@@ -22,10 +22,10 @@
     <script src="lib/ial.js"></script>
     <link rel="stylesheet" href="lib/bootstrap.min.css">
 
-    <script src='js/scatter-plot_dog.js'></script>
+    <script src='js/scatter-plot_credit.js'></script>
     <script src='js/axis.js'></script>
     <script src='js/para-coord.js'></script>
-    <script src='js/main_dog.js'></script>
+    <script src='js/main_credit.js'></script>
     <link rel="stylesheet" type="text/css" href="css/my-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.qtip.min.css">
 
@@ -39,11 +39,10 @@
         <h5>Select Initial X Dimension:
 		
             <select id="initX">
-                <option value="Age" selected="selected">Age</option>
+                <option value="age">Age</option>
                 <option value="Annual_Income">Annual Income</option>
                 <option value="Num_Bank_Accounts">Number of Bank Accounts</option>
                 <option value="Num_Credit_Card">Number of Credit Cards</option>
-                <option value="Credit_History_Age">Credit History Age</option>
                 <option value="Interest_Rate">Interest Rate</option>
                 <option value="Num_of_Loan">Number of Loans</option>
                 <option value="Delay_from_due_date">Delay from Due Date</option>
@@ -51,6 +50,7 @@
                 <option value="Num_Credit_Inquiries">Number of Credit Inquiries</option>
                 <option value="Outstanding_Debt">Outstanding Debts</option>
                 <option value="Credit_Utilization_Ratio">Credit Utilization Ratio</option>
+                <option value="Credit_History_Age">Credit History Age</option>
                 <option value="Amount_invested_monthly">Amount Invested Monthly</option>
                 <option value="Monthly_Balance" >Monthly Balance</option>
             </select>
@@ -58,11 +58,10 @@
         <br><br>
         <h5>Select Initial Y Dimension:
             <select id="initY">
-                <option value="Age" selected="selected">Age</option>
+                <option value="age">Age</option>
                 <option value="Annual_Income">Annual Income</option>
                 <option value="Num_Bank_Accounts">Number of Bank Accounts</option>
                 <option value="Num_Credit_Card">Number of Credit Cards</option>
-                <option value="Credit_History_Age">Credit History Age</option>
                 <option value="Interest_Rate">Interest Rate</option>
                 <option value="Num_of_Loan">Number of Loans</option>
                 <option value="Delay_from_due_date">Delay from Due Date</option>
@@ -70,8 +69,9 @@
                 <option value="Num_Credit_Inquiries">Number of Credit Inquiries</option>
                 <option value="Outstanding_Debt">Outstanding Debts</option>
                 <option value="Credit_Utilization_Ratio">Credit Utilization Ratio</option>
+                <option value="Credit_History_Age">Credit History Age</option>
                 <option value="Amount_invested_monthly">Amount Invested Monthly</option>
-                <option value="Monthly_Balance">Monthly Balance</option>
+                <option value="Monthly_Balance" >Monthly Balance</option>
             </select>
         </h5>
         <br><br>
@@ -88,6 +88,8 @@
             var indexY = mySelectY.selectedIndex;
             var defaultX = mySelectX.options[indexX].text;
             var defaultY = mySelectY.options[indexY].text;
+            window.localStorage.setItem('defaultX_credit', defaultX);
+            window.localStorage.setItem('defaultY_credit', defaultY);
             var w = window.open("study_creditScore.html", "_self");
         };
 

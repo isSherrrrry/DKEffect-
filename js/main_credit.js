@@ -7,44 +7,62 @@ var X = [], Y = [];
 var loaddata = [];
 var istxtdata = false;
 var colorScale = d3.scale.category10();
-var label = { DEFAULT: "Un-Assign", PG: "Point Guard", SG: "Shooting Guard", SF: "Small Forward", PF: "Power Forward", C: "Center" };
-var positions = [label.DEFAULT, label.PG, label.SG, label.SF, label.PF, label.C];
-var colorMap = { "Un-Assign": "#7f7f7f", "Point Guard": colorScale(0), "Shooting Guard": colorScale(1), "Small Forward": colorScale(2), "Power Forward": colorScale(3), "Center": colorScale(4) };
+var label = { DEFAULT: "Un-Assign", CR2: "Good", CR1: "Fair", CR0: "Poor"};
+var positions = [label.DEFAULT, label.CR2, label.CR1, label.CR0];
+var colorMap = { "Un-Assign": "#7f7f7f", "Good": "#609F3A", "Fair": "#E48024", "Poor": "#B82C2C"};
 var defaultColor = colorScale(5);
 defaultColor = colorScale(6);
 defaultColor = colorScale(7);
-var positionDescriptions1 = { "Un-Assign": "un-assign a point", "Point Guard": "usually the smallest and quickest players", "Shooting Guard": "typically of small-medium size and stature", "Small Forward": "typically of medium size and stature", "Power Forward": "typically of medium-large size and stature", "Center": "typically the largest players on the team" };
-var positionDescriptions2 = { "Un-Assign": "un-assign a point", "Point Guard": "skilled at passing and dribbling; primarily responsible for distributing the ball to other players resulting in many assists", "Shooting Guard": "typically attempts many shots, especially long-ranged shots", "Small Forward": "typically a strong defender with lots of steals", "Power Forward": "typically spends most time near the basket, resulting in lots of rebounds", "Center": "responsible for protecting the basket, resulting in lots of blocks" };
-//var positionDescriptionsDemo = {"Un-Assign": "un-assign a point", "Point Guard": "responsible for controlling the ball", "Shooting Guard": "guards the opponent's best perimeter player on defense", "Small Forward": "typically makes many rebounds", "Power Forward": "typically some of the physically strongest players on the team", "Center": "typically relied on for both strong offense and defense"};
-var positionDescriptions;// = positionDescriptions1;
 var activePosition = "none";
 var playerPositionMap = {};
 var helpMouseoverStart = 0;
 var helpMouseoverEnd = 0;
 
-//Gets called when the page is loaded.
+
+function getInitX() {
+
+	var mySelectX = document.getElementById('initX');
+	var defaultValueX = mySelectX.options[mySelectX.selectedIndex].text;
+
+	console.log(defaultValueX);
+	return defaultValueX
+
+}
+function getInitY() {
+	var mySelectY = document.getElementById('initY');
+	var defaultValueY = mySelectY.options[mySelectY.selectedIndex].text;
+	console.log(defaultValueY);
+	return defaultValueY
+}
+
+
 function init() {
-	// defaultX = $("#initX :selected").text();
-	// defaultY = $("#initY :selected").text();
+	defaultX = $("#initX :selected").text();
+	defaultY = $("#initY :selected").text();
 	$("#area1").show();
 	$("#area2").show();
 	$("#area3").show();
 	$("#dialog").hide();
 	loadData();
 }
+
+
+
 function loadData() {
 	// Get input data
-	d3.csv('data/bball_top50_decimal_removed.csv', function (data) { // demo50 dataset
+	d3.csv('data/credt_removed.csv', function (data) { // demo50 dataset
 		var loaddata = jQuery.extend(true, [], data);
 		for (var i = 0; i < loaddata.length; i++) {
-			loaddata[i]["Name"] = "Player " + loaddata[i]["Player Anonymized"];
-			delete loaddata[i]["Player"];
-			delete loaddata[i]["Player Anonymized"];
-			delete loaddata[i]["Position"];
-			delete loaddata[i]["Team"];
-			playerPositionMap[loaddata[i]["Name"]] = "none";
+			loaddata[i]["name"] = "Name: " + loaddata[i]["Customer_id"];
+			delete loaddata[i]["Customer ID"];
+			delete loaddata[i]["Name"];
+			delete loaddata[i]["Credit Score"];
+
+			playerPositionMap[loaddata[i]["name"]] = "none";
 			loaddata[i]["coord"] = {};
 		}
+		console.log(loadData[0]);
+
 		attr = Object.keys(loaddata[0]);
 		attr.pop(); // remove "coord" from attribute list
 		attr.pop(); // remove "Name" from attribute list
@@ -56,7 +74,7 @@ function loadData() {
 		});
 
 		for (var i = 0; i < attrNo; i++) {
-			if (attr[i] != "Name" && attr[i] != "coord") {
+			if (attr[i] != "name" && attr[i] != "coord") {
 				var tmpmax = d3.max(loaddata, function (d) { return +d[attr[i]]; });
 				var tmpmin = d3.min(loaddata, function (d) { return +d[attr[i]]; });
 
@@ -80,34 +98,25 @@ function loadData() {
 		}
 
 		// determine which condition the user follows and which set of descriptions should be used
-		var rand = Math.floor(Math.random() * 10) + 1;
-		console.log(rand);
-		if (rand % 2 == 0) positionDescriptions = positionDescriptions1;
-		else positionDescriptions = positionDescriptions2;
-		// console.log(window.localStorage.getItem("whichCondition"));
 		// if (window.localStorage.getItem("whichCondition") == 1) positionDescriptions = positionDescriptions1;
 		// else positionDescriptions = positionDescriptions2;
+		//positionDescriptions = positionDescriptionsDemo;
 
-		// initialize log entries
-		R7Insight.init({
-			token: 'd51a6564-1a20-435f-afef-41806a4bc4cb',
-			region: 'us3'
-		});
-		R7Insight.log("Log event");
-
-		// initialize IAL
-		ial.init(loaddata, 0, ["coord", "Name"], "exclude", -1, 1);
+		// initialize rapid7
+		ial.init(loaddata, 0, ["coord", "name"], "exclude", -1, 1);
 		console.log("ial initialized");
 
+		console.log(loaddata);
 		// load the vis
 		loadVis(loaddata);
+		allData.push(loaddata);
+
 	});
 }
 
 //Main function
 function loadVis(data) {
 	drawScatterPlot(data);
-	//updateBias(true);
 
 	for (var i = 0; i < attrNo; i++) {
 		dims[i] = attr[i];
@@ -116,34 +125,33 @@ function loadVis(data) {
 	tabulate(data[0], 'empty');
 	addHelp();
 	addClassificationControls(data);
-	addCustomAxisDropDownControls();
+
+	console.log("Hello, logger!");
 }
 
-function addCustomAxisDropDownControls() {
-	$("#cbX").on('change', function () {
-		if ($(this).val() != "Custom Axis") {
-			$("#cbX option[value='Custom Axis']").remove();
-		}
-	});
-}
+// function addCustomAxisDropDownControls() {
+// 	$("#cbX").on('change', function () {
+// 		if ($(this).val() != "Custom Axis") {
+// 			$("#cbX option[value='Custom Axis']").remove();
+// 		}
+// 	});
+// }
 
 function addHelp() {
-	var tooltipText = '<div class="qtip-dark"><b>Task:</b> Your task is to classify all of the points in the scatterplot. Each <i>circle</i> in the scatterplot represents a <i>basketball player</i>. Color each circle according to the <i>position</i> you think the basketball player plays.';
+	var tooltipText = '<div class="qtip-dark"><b>Task:</b> Your task is to classify all of the points in the scatterplot. Each <i>circle</i> in the scatterplot represents a <i> candidate and their credit score</i>. Color each circle according to the <i>breed</i> you think the credit score belongs to.';
+	tooltipText += '<br><br>';
+	tooltipText += '<b>Note:</b> Each attribute is evaluated on a scale ranging from <b>good</b> to <b>poor</b>';
 	tooltipText += '<br><br>';
 	tooltipText += '<b>Interactions:</b> <ul>';
 	tooltipText += '<li><i>See Details</i> about a point by <i>Hovering</i> over it. Details will be shown in the text on the right.</li>';
-	tooltipText += '<li><i>Activate a Position</i> by <i>Clicking</i> on a colored circle on the right.</li>';
-	tooltipText += '<li><i>Deactivate a Position</i> by <i>Double Clicking</i> on any colored circle on the right.</li>';
-	tooltipText += '<li><i>Classify a Point</i> on the scatterplot by <i>Clicking</i> on it while its position is activated.</li>';
+	tooltipText += '<li><i>Activate a breed</i> by <i>Clicking</i> on a colored circle on the right.</li>';
+	tooltipText += '<li><i>Deactivate a breed</i> by <i>Double Clicking</i> on any colored circle on the right.</li>';
+	tooltipText += '<li><i>Classify a Point</i> on the scatterplot by <i>Clicking</i> on it while its breed is activated.</li>';
 	tooltipText += '<li><i>Un-Assign a Point</i> on the scatterplot by <i>Clicking</i> on it while "Un-Assign" is activated.</li>';
 	tooltipText += '<li><i>Change the Axes</i> by <i>Selecting</i> a new variable from the drop-down on the X or Y axes.</li>';
-	tooltipText += '<li><i>Define a Custom Axis</i> by <i>Dragging</i> points from the scatterplot to the bins along the X-Axis.</li>';
-	tooltipText += '<li><i>Remove a Point from a Bin</i> on the X-Axis by <i>Double Clicking</i> the point inside the bin.</li>';
-	tooltipText += '<li><i>Reset the X-Axis</i> to the default by <i>Clicking</i> the "Clear X" button to clear both bins and change it to the default dimension.</li>';
-	tooltipText += '<li><i>Change the Weight of an Attribute</i> along the X-Axis by <i>Dragging</i> the bars to manually change the weight.</li>';
 	tooltipText += '</ul>';
 	tooltipText += '<br>';
-	tooltipText += 'Try to classify all points in the scatterplot to complete the study. When ready to continue, check the box in bottom right and press <strong><i>Continue</i></strong> to proceed to the next phase of the study.';
+	tooltipText += 'Try to classify all points in the scatterplot to complete the study. When ready to continue, check the box in bottom right and press set_attribute_weight_vector_drag to proceed to the next phase of the study.';
 	tooltipText += '</div>';
 	$("#helpButton").qtip({
 		content: {
@@ -165,11 +173,12 @@ function addHelp() {
 		// get the x,y coordinates of all the points on the graph to log
 		var data_locations = [];
 		d3.select("#SC").selectAll("circle").each(function (d) {
-			var pt_log = { player: d.Name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
+			var pt_log = { credit: d.name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
 			data_locations.push(pt_log);
 		});
 
-		ial.logging.log('help', undefined, 'HelpHover', { 'level': 'INFO', 'taskType': 'bball', 'eventType': 'help_hover', 'elapsedTime': elapsedTime, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+		ial.logging.log('help', undefined, 'HelpHover', { 'level': 'INFO', 'taskType': 'credit', 'eventType': 'help_hover', 'elapsedTime': elapsedTime, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+		// LE.log(JSON.stringify(ial.logging.peek()));
 		R7Insight.log(JSON.stringify(ial.logging.peek()));
 		// testing
 		console.log(JSON.stringify(ial.logging.peek()));
@@ -186,21 +195,23 @@ function addClassificationControls(data) {
 		.enter().append("g")
 		.attr("transform", function (d, i) { return "translate(30, " + (24 * (i + 1)) + ")"; })
 		.on("click", function (d) {
+			// 
 			activePosition = d;
 			d3.selectAll(".category").classed("categoryClicked", false);
 			d3.select(this).select("circle").classed("categoryClicked", true);
-			/* ---------- disabling description display ---------- */
-			// $("#datapanel3").html("<h5 style=\"color:" + colorMap[d] + "; stroke: 1px black;\">" + d + ":</h5> <h6>" + positionDescriptions[d] + "</h6>");
+			/* ---------- disabling image display ---------- */
+			// $("#datapanel3").html("<h5 style=\"color:" + colorMap[d] + "; stroke: 1px black;\">" + d + ":</h5> <img src=" + positionDescriptions[d] + " width=304 height=228>");
 
 			// get the x,y coordinates of all the points on the graph to log
 			var data_locations = [];
 			d3.select("#SC").selectAll("circle").each(function (d) {
-				var pt_log = { player: d.Name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
+				var pt_log = { credit: d.name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
 				data_locations.push(pt_log);
 			});
 
-			ial.logging.log('category_' + activePosition, undefined, 'CategoryClick', { 'level': 'INFO', 'taskType': 'bball', 'eventType': 'category_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
-			// LE.log(JSON.stringify(ial.logging.peek()));
+			ial.logging.log('category_' + activePosition, undefined, 'CategoryClick', { 'level': 'INFO', 'taskType': 'credit', 'eventType': 'category_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+
+			//LE.log(JSON.stringify(ial.logging.peek()));
 			R7Insight.log(JSON.stringify(ial.logging.peek()));
 		}).on("dblclick", function () {
 			activePosition = "none";
@@ -210,11 +221,11 @@ function addClassificationControls(data) {
 			// get the x,y coordinates of all the points on the graph to log
 			var data_locations = [];
 			d3.select("#SC").selectAll("circle").each(function (d) {
-				var pt_log = { player: d.Name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
+				var pt_log = { credit: d.Name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
 				data_locations.push(pt_log);
 			});
 
-			ial.logging.log('category_' + activePosition, undefined, 'CategoryDoubleClick', { 'level': 'INFO', 'taskType': 'bball', 'eventType': 'category_double_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+			ial.logging.log('category_' + activePosition, undefined, 'CategoryDoubleClick', { 'level': 'INFO', 'taskType': 'credit', 'eventType': 'category_double_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
 			// LE.log(JSON.stringify(ial.logging.peek()));
 			R7Insight.log(JSON.stringify(ial.logging.peek()));
 		});
@@ -241,18 +252,18 @@ function addClassificationControls(data) {
 				}
 			}
 			var prevURL = document.referrer;
-			if (localStorage.getItem("first_task") == 'bball') {
+			if (localStorage.getItem("first_task") != 'credit') {
 				if (!allClassified) {
 					if ((data.length - howMany) <= (data.length * 0.8)) {
 						var userResp = alert("Please classify more points.");
 					} else {
 						var userResp = confirm(howMany + " out of " + data.length + " points have not been classified yet. Are you sure you want to continue?");
 						if (userResp) { // user wants to continue anyway
-							var w = window.open("custom_axis_dog.html", "_self");
+							var w = window.open("ending.html", "_self");
 						}
 					}
 				} else {
-					var w = window.open("custom_axis_dog.html", "_self");
+					var w = window.open("ending.html", "_self");
 					window.localStorage.setItem("userId", window.localStorage.getItem("userId"));
 					window.localStorage.setItem("whichCondition", window.localStorage.getItem("whichCondition"));
 				}
@@ -263,11 +274,11 @@ function addClassificationControls(data) {
 					} else {
 						var userResp = confirm(howMany + " out of " + data.length + " points have not been classified yet. Are you sure you want to continue?");
 						if (userResp) { // user wants to continue anyway
-							var w = window.open("postsurvey.html", "_self");
+							var w = window.open("ending.html", "_self");
 						}
 					}
 				} else {
-					var w = window.open("postsurvey.html", "_self");
+					var w = window.open("ending.html", "_self");
 					window.localStorage.setItem("userId", window.localStorage.getItem("userId"));
 					window.localStorage.setItem("whichCondition", window.localStorage.getItem("whichCondition"));
 				}
@@ -278,8 +289,7 @@ function addClassificationControls(data) {
 
 function drawScatterPlot(data) {
 
-	// heterogeneous data
-	initdim1 = attr.indexOf(localStorage.getItem("defaultX_bball")), initdim2 = attr.indexOf(localStorage.getItem("defaultY_bball")); // 1, 2 = height, weight
+	initdim1 = attr.indexOf(localStorage.getItem("defaultX_credit")), initdim2 = attr.indexOf(localStorage.getItem("defaultY_credit"));
 	data.forEach(function (d) { d.x = d["coord"][attr[initdim1]]; d.y = d["coord"][attr[initdim2]]; });
 	graph = new SimpleGraph("scplot", data, {
 		"xlabel": attr[initdim1],
@@ -301,15 +311,17 @@ function drawScatterPlot(data) {
 	// get the x,y coordinates of all the points on the graph to log
 	var data_locations = [];
 	d3.select("#SC").selectAll("circle").each(function (d) {
-		var pt_log = { player: d.Name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
+		var pt_log = { credit: d.name, x: d.x, y: d.y, cx: +this.getAttribute("cx"), cy: +this.getAttribute("cy") };
 		data_locations.push(pt_log);
 	});
 
 	//update IAL weight vector
-	ial.usermodel.setAttributeWeightVector(V1, true, { 'level': 'INFO', 'taskType': 'bball', 'eventType': 'set_attribute_weight_vector_init', 'whichAxis': 'X', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
-	// LE.log(JSON.stringify(ial.logging.peek()));
+	ial.usermodel.setAttributeWeightVector(V1, true, { 'level': 'INFO', 'taskType': 'credit', 'eventType': 'set_attribute_weight_vector_init', 'whichAxis': 'X', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+
 	R7Insight.log(JSON.stringify(ial.logging.peek()));
-	ial.usermodel.setAttributeWeightVector(V2, true, { 'level': 'INFO', 'taskType': 'bball', 'eventType': 'set_attribute_weight_vector_init', 'whichAxis': 'Y', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+	//LE.log(JSON.stringify(ial.logging.peek()));
+	ial.usermodel.setAttributeWeightVector(V2, true, { 'level': 'INFO', 'taskType': 'credit', 'eventType': 'set_attribute_weight_vector_init', 'whichAxis': 'Y', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations });
+
 	// LE.log(JSON.stringify(ial.logging.peek()));
 	R7Insight.log(JSON.stringify(ial.logging.peek()));
 

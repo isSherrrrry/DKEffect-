@@ -113,20 +113,14 @@ function loadData() {
 		//positionDescriptions = positionDescriptionsDemo;
 
 		// initialize rapid7
-		R7Insight.init({
-			token: 'd51a6564-1a20-435f-afef-41806a4bc4cb',
-			region: 'us3'
-		});
-		// log something
-		R7Insight.log("This is a log event");
-
-		// initialize IAL
+	
 		ial.init(loaddata, 0, ["coord", "Name"], "exclude", -1, 1);
 		console.log("ial initialized");
 
 		console.log(loaddata);
 		// load the vis
 		loadVis(loaddata);
+		allData2.push(loaddata);
 	});
 }
 
@@ -285,7 +279,7 @@ function addClassificationControls(data) {
 						// document.getElementById('continueButton').onclick = function () {
 							// if (x % 2 == 0) {
 								localStorage.setItem('first_task', 'credit');
-								var w = window.open('custom_axis_credit.html', '_self');
+								var w = window.open('ending.html', '_self');
 							// } else {
 							// 	localStorage.setItem('first_task', 'dog');
 							// 	var w = window.open('custom_axis_dog.html', '_self');
@@ -301,7 +295,7 @@ function addClassificationControls(data) {
 				// document.getElementById('continueButton').onclick = function () {
 					// if (x % 2 == 0) {
 						localStorage.setItem('first_task', 'credit');
-						var w = window.open('custom_axis_credit.html', '_self');
+						var w = window.open('ending.html', '_self');
 					// } else {
 					// 	localStorage.setItem('first_task', 'dog');
 					// 	var w = window.open('custom_axis_credit.html', '_self');
@@ -320,9 +314,8 @@ function addClassificationControls(data) {
 function drawScatterPlot(data) {
 
 	// heterogeneous data
-	// console.log(localStorage.getItem("defaultX_car"), "defaultX_car");
-	// initdim1 = attr.indexOf(localStorage.getItem("defaultX_car")), initdim2 = attr.indexOf(localStorage.getItem("defaultY_car")); // 1, 2 = height, weight
-	initdim1 = attr.indexOf('HP'), initdim2 = attr.indexOf('Weight');
+	initdim1 = attr.indexOf(localStorage.getItem("defaultX_car")), initdim2 = attr.indexOf(localStorage.getItem("defaultY_car")); // 1, 2 = height, weight
+	// initdim1 = attr.indexOf('HP'), initdim2 = attr.indexOf('Weight');
 	data.forEach(function (d) { d.x = d["coord"][attr[initdim1]]; d.y = d["coord"][attr[initdim2]]; });
 	graph = new SimpleGraph("scplot", data, {
 		"xlabel": attr[initdim1],

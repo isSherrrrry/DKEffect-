@@ -40,7 +40,7 @@ svg {
 #scplot {
   background-color: #e0e0e0;
   width: 1030px;
-  height: 725px;
+  height: 900px;
   display: block;
   overflow: hidden;
   /*height: 650px; */
@@ -262,4 +262,9 @@ circle:click {
 }
 #drop{
   display: none;
+}
+
+.col-md-8 svg{
+  display: inline-block;
+  height: 80%;
 }

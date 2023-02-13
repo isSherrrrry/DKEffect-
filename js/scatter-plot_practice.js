@@ -9,6 +9,7 @@ var biasWidthScale = d3.scaleLinear()
     .domain([0.0, 1.0])
     .range([5, 150]);
 var biasResults = [0, 0, 0, 0, 0, 0];
+var allData2 = [];
 
 registerKeyboardHandler = function(callback) {
   var callback = callback;
@@ -285,8 +286,7 @@ SimpleGraph.prototype.update = function() {
       // ial.usermodel.incrementItemWeight(d, CLICK_WEIGHT, true, {'level': 'INFO', 'eventType': 'click', 'classification': activePosition, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'pointLocation': 'scatterplot', 'data_locations': data_locations});
       ial.usermodel.incrementItemWeight(d, CLICK_WEIGHT, true, {'level': 'INFO', 'eventType': 'click', 'classification': activePosition, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'pointLocation': 'scatterplot'});
       //修改点
-      R7Insight.log(JSON.stringify(ial.logging.peek()));
-      console.log("classified");
+      allData2.push(JSON.stringify(ial.logging.peek()));
     } else {
       // get the x,y coordinates of all the points on the graph to log --3 clicked a point without classification
       var data_locations = [];
