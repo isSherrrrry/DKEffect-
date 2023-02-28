@@ -77,16 +77,13 @@
 	if (whichCondition) whichCondition = 1; 
 	else whichCondition = 2;
 	
-	// EMILY: REMOVE FOR ACTUAL STUDY: 
-	// whichCondition = 2;
-	
 	// set local storage of user id and condition in browser
 	window.localStorage.setItem("userId", userId);
 	window.localStorage.setItem("whichCondition", whichCondition);
 	
 	document.getElementById("continueButton").onclick = function () {
 		if (document.getElementById("acceptCheck").checked) {
-			var w = window.open("custom_axis_credit.html", "_self");
+			var w = window.open("presurvey.html", "_self");
 		} else alert("You must read and accept the consent form in order to participate in the user study.");
 	};
 </script>

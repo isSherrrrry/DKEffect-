@@ -9,7 +9,6 @@ var biasWidthScale = d3.scaleLinear()
     .domain([0.0, 1.0])
     .range([5, 150]);
 var biasResults = [0, 0, 0, 0, 0, 0];
-var allData = [];
 
 registerKeyboardHandler = function(callback) {
   var callback = callback;
@@ -263,6 +262,7 @@ SimpleGraph.prototype.update = function() {
           // log the mouseover with IAL
           ial.usermodel.incrementItemWeight(d, HOVER_WEIGHT, true, {'level': 'INFO', 'eventType': 'hover', 'elapsedTime': elapsedTime, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'pointLocation': 'scatterplot'});
           R7Insight.log(JSON.stringify(ial.logging.peek()));
+          allData.push(JSON.stringify(ial.logging.peek()));
           console.log("hovered");
           //updateBias(false);
         }
@@ -299,6 +299,7 @@ SimpleGraph.prototype.update = function() {
       ial.usermodel.incrementItemWeight(d, CLICK_WEIGHT, true, {'level': 'INFO', 'eventType': 'click', 'classification': 'none', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'pointLocation': 'scatterplot'});
       R7Insight.log(JSON.stringify(ial.logging.peek()));
       console.log("clicked a point without classification");
+      allData.push(JSON.stringify(ial.logging.peek()));
     }
     tabulate(d,"click");
     sglclick(d);
@@ -330,6 +331,7 @@ SimpleGraph.prototype.update = function() {
           // log the drag with IAL
           ial.usermodel.incrementItemWeight(d, DRAG_WEIGHT, true, {'level': 'INFO', 'eventType': 'drag', 'elapsedTime': elapsedTime, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'pointLocation': 'scatterplot', 'data_locations': data_locations});
           R7Insight.log(JSON.stringify(ial.logging.peek()));
+          allData.push(JSON.stringify(ial.logging.peek()));
           console.log("dragged a point");
           //updateBias(false);
           isDragging = false;
@@ -585,6 +587,7 @@ SimpleGraph.prototype.mouseup = function() {
                   // ial.usermodel.incrementItemWeight(d, HOVER_WEIGHT, true, {'level': 'INFO', 'eventType': 'hover', 'elapsedTime': elapsedTime, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'pointLocation': whichBin, 'data_locations': data_locations});
                   R7Insight.log(JSON.stringify(ial.logging.peek()));
                   console.log("hovered in bins");
+                  allData.push(JSON.stringify(ial.logging.peek()));
                 }
                 tabulate(d, 'empty');
               })
@@ -606,6 +609,7 @@ SimpleGraph.prototype.mouseup = function() {
                 ial.usermodel.incrementItemWeight(d, DOUBLE_CLICK_WEIGHT, true, {'level': 'INFO', 'eventType': 'double_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'pointLocation': whichBin});
                 R7Insight.log(JSON.stringify(ial.logging.peek()));
                 console.log("double clicked to clear");
+                allData.push(JSON.stringify(ial.logging.peek()));
                 // ial.usermodel.incrementItemWeight(d, DOUBLE_CLICK_WEIGHT, true, {'level': 'INFO', 'eventType': 'double_click', 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'pointLocation': whichBin, 'data_locations': data_locations});
                 // LE.log(JSON.stringify(ial.logging.peek()));
 
@@ -649,6 +653,7 @@ SimpleGraph.prototype.mouseup = function() {
           // log the drag with IAL
           ial.usermodel.incrementItemWeight(self.dragged, DRAG_WEIGHT, true, {'level': 'INFO', 'eventType': 'drag', 'bin': self.dropped, 'elapsedTime': elapsedTime, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations});
           R7Insight.log(JSON.stringify(ial.logging.peek()));
+          allData.push(JSON.stringify(ial.logging.peek()));
           console.log("dragged into bins");
           // LE.log(JSON.stringify(ial.logging.peek()));
           //updateBias(false);
@@ -762,6 +767,7 @@ updategraph = function(axistobeupdated,givenV,givenVchanged) {
   ial.usermodel.setAttributeWeightVector(V, true, {'level': 'INFO', 'eventType': 'set_attribute_weight_vector_calc', 'whichAxis': axistobeupdated, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations});
   // modified logging
   R7Insight.log(JSON.stringify(ial.logging.peek()));
+  allData.push(JSON.stringify(ial.logging.peek()));
   console.log("set attribute weight");
   // LE.log(JSON.stringify(ial.logging.peek()));
 
@@ -1050,6 +1056,7 @@ updatebycb = function(axistobeupdated, selectedattr) {
   ial.usermodel.setAttributeWeightVector(V2, true, {'level': 'INFO', 'eventType': 'set_attribute_weight_vector_select', 'whichAxis': axistobeupdated, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations});
   // modified logging
   R7Insight.log(JSON.stringify(ial.logging.peek()));
+  allData.push(JSON.stringify(ial.logging.peek()));
   console.log("select axis");
   // LE.log(JSON.stringify(ial.logging.peek()));
 

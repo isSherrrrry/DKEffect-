@@ -1,26 +1,26 @@
-Customer ID,Name,Age,Annual Income,Number of Bank Accounts,Number of Credit Cards,Interest Rate,Number of Loans,Delay from Due Date,Number of Delayed Payments,Number of Credit Inquiries,Outstanding Debts,Credit Utilization Ratio,Credit History Age,Amount Invested Monthly,Monthly Balance,Credit Score
-CUS_0xd40,Aaron Maashoh,23.0,19114,3,4,3,4.0,3,7.0,4.0,809,26,265.0,80,312,2
-CUS_0x21b1,Rick Rothackerj,28.0,34847,2,4,6,1.0,7,1.0,2.0,605,38,320.0,40,484,2
-CUS_0xb891,Jasond,54.0,30689,2,5,4,1.0,0,6.0,4.0,632,26,207.0,81,433,1
-CUS_0x284a,Nadiaq,33.0,131313,0,1,8,2.0,0,3.0,2.0,352,32,367.0,378,858,2
-CUS_0x5407,Annk,30.0,34081,8,7,15,3.0,30,14.0,5.0,1704,35,176.0,38,392,0
-CUS_0x4157,Charlie Zhur,23.0,114838,2,5,7,3.0,14,8.0,3.0,1377,27,257.0,212,785,2
-CUS_0xba08,Jamesj,44.0,31370,1,6,12,2.0,2,0.0,2.0,421,28,318.0,298,227,2
-CUS_0xa66b,Saphirj,40.0,33751,5,5,20,3.0,16,20.0,4.0,1328,30,231.0,70,399,1
-CUS_0x3e45,Harriet McLeodd,35.0,54392,6,4,14,3.0,10,8.0,3.0,179,25,322.0,243,378,1
-CUS_0x6c66,Sinead Carews,39.0,8701,6,5,32,7.0,23,9.0,6.0,2602,24,107.0,13,272,0
-CUS_0xff4,Poornimaf,36.0,25546,8,7,14,5.0,16,14.0,5.0,758,37,218.0,53,337,1
-CUS_0x33d2,Chalmersa,30.0,31993,6,6,7,2.0,8,14.0,0.0,818,25,202.0,81,447,1
-CUS_0xfdb,Patrickg,45.0,32284,6,7,17,6.0,11,12.0,8.0,1283,28,77.0,254,211,1
-CUS_0x4100,Reema,31.0,19300,6,7,17,5.0,51,18.0,7.0,2430,36,219.0,55,306,0
-CUS_0xa16e,Lee Chyenz,41.0,10183,7,5,17,5.0,48,18.0,6.0,1672,32,122.0,92,267,0
-CUS_0xb95f,Ashleyk,30.0,34290,9,8,25,7.0,52,10.0,9.0,2686,39,164.0,248,106,0
-CUS_0x3edc,Williamso,32.0,43070,3,3,18,1.0,11,8.0,4.0,1233,27,230.0,397,224,1
-CUS_0xbffe,Dhanya Skariachano,40.0,28572,6,3,15,3.0,25,12.0,0.0,400,24,363.0,42,348,1
-CUS_0xb681,Sarahb,37.0,39641,10,8,25,6.0,61,16.0,8.0,2258,33,105.0,236,162,0
-CUS_0x9a71,Mukhopadhyayc,54.0,20186,1,5,1,2.0,5,6.0,4.0,413,35,219.0,74,334,2
-CUS_0x6048,Ayeshaz,43.0,18627,7,7,19,6.0,31,21.0,7.0,1793,38,225.0,48,275,0
-CUS_0x95b5,Lisa Baertleinu,21.0,12986,4,3,10,2.0,30,14.0,5.0,1489,26,104.0,16,312,1
-CUS_0x4004,Carlosj,43.0,58317,8,5,9,6.0,18,20.0,6.0,98,27,158.0,83,483,1
-CUS_0xb101,Andreas Cremerf,36.0,42171,2,7,10,3.0,4,10.0,4.0,556,33,257.0,56,466,1
-CUS_0x9b94,Bri,36.0,71681,3,6,15,1.0,8,6.0,0.0,1293,29,308.0,137,638,1
+Customer ID,Name,Age,Annual Income,Number of Bank Accounts,Number of Credit Cards,Interest Rate,Number of Loans,Delay from Due Date,Number of Delayed Payments,Number of Credit Inquiries,Outstanding Debts,Credit Utilization Ratio,Credit History Age,Amount Invested Monthly,Monthly Balance,Credit Score,creditID
+CUS_0xd40,Aaron Maashoh,23,19114,3,4,3,4,3,7,4,809,26,265,80,312,2,credit_1
+CUS_0x21b1,Rick Rothackerj,28,34847,2,4,6,1,7,1,2,605,38,320,40,484,2,credit_2
+CUS_0xb891,Jasond,54,30689,2,5,4,1,0,6,4,632,26,207,81,433,1,credit_3
+CUS_0x284a,Nadiaq,33,131313,0,1,8,2,0,3,2,352,32,367,378,858,2,credit_4
+CUS_0x5407,Annk,30,34081,8,7,15,3,30,14,5,1704,35,176,38,392,0,credit_5
+CUS_0x4157,Charlie Zhur,23,114838,2,5,7,3,14,8,3,1377,27,257,212,785,2,credit_6
+CUS_0xba08,Jamesj,44,31370,1,6,12,2,2,0,2,421,28,318,298,227,2,credit_7
+CUS_0xa66b,Saphirj,40,33751,5,5,20,3,16,20,4,1328,30,231,70,399,1,credit_8
+CUS_0x3e45,Harriet McLeodd,35,54392,6,4,14,3,10,8,3,179,25,322,243,378,1,credit_9
+CUS_0x6c66,Sinead Carews,39,8701,6,5,32,7,23,9,6,2602,24,107,13,272,0,credit_10
+CUS_0xff4,Poornimaf,36,25546,8,7,14,5,16,14,5,758,37,218,53,337,1,credit_11
+CUS_0x33d2,Chalmersa,30,31993,6,6,7,2,8,14,0,818,25,202,81,447,1,credit_12
+CUS_0xfdb,Patrickg,45,32284,6,7,17,6,11,12,8,1283,28,77,254,211,1,credit_13
+CUS_0x4100,Reema,31,19300,6,7,17,5,51,18,7,2430,36,219,55,306,0,credit_14
+CUS_0xa16e,Lee Chyenz,41,10183,7,5,17,5,48,18,6,1672,32,122,92,267,0,credit_15
+CUS_0xb95f,Ashleyk,30,34290,9,8,25,7,52,10,9,2686,39,164,248,106,0,credit_16
+CUS_0x3edc,Williamso,32,43070,3,3,18,1,11,8,4,1233,27,230,397,224,1,credit_17
+CUS_0xbffe,Dhanya Skariachano,40,28572,6,3,15,3,25,12,0,400,24,363,42,348,1,credit_18
+CUS_0xb681,Sarahb,37,39641,10,8,25,6,61,16,8,2258,33,105,236,162,0,credit_19
+CUS_0x9a71,Mukhopadhyayc,54,20186,1,5,1,2,5,6,4,413,35,219,74,334,2,credit_20
+CUS_0x6048,Ayeshaz,43,18627,7,7,19,6,31,21,7,1793,38,225,48,275,0,credit_21
+CUS_0x95b5,Lisa Baertleinu,21,12986,4,3,10,2,30,14,5,1489,26,104,16,312,1,credit_22
+CUS_0x4004,Carlosj,43,58317,8,5,9,6,18,20,6,98,27,158,83,483,1,credit_23
+CUS_0xb101,Andreas Cremerf,36,42171,2,7,10,3,4,10,4,556,33,257,56,466,1,credit_24
+CUS_0x9b94,Bri,36,71681,3,6,15,1,8,6,0,1293,29,308,137,638,1,credit_25

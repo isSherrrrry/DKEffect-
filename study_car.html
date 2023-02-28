@@ -120,7 +120,7 @@
 			return;
 		}
 
-		if(!filename) filename = 'console.json'
+		if(!filename) filename = window.localStorage.getItem("userId") + "_car.json";
 
 		if(typeof data === "object"){
 			data = JSON.stringify(data, undefined, 4)
@@ -187,7 +187,7 @@
 		cursorX = e.pageX;
 		cursorY = e.pageY;
 		var dataClick = [];
-		dataClick = ["dataclick " + "x: " + cursorX + " y: " + cursorY + " date: " + datetime];
+		dataClick = ["userID: " + userId + " dataclick " + "x: " + cursorX + " y: " + cursorY + " date: " + datetime];
 		allData2.push(dataClick);
 	}
 	

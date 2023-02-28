@@ -18,6 +18,8 @@ var activePosition = "none";
 var playerPositionMap = {};
 var helpMouseoverStart = 0;
 var helpMouseoverEnd = 0;
+var allData2 = [];
+
 
 function getInitX() {
 	// var sel=document.getElementById('initX');
@@ -63,16 +65,14 @@ function loadData() {
 	d3.csv('data/practice_removed.csv', function (data) { // total 15 points for practice
 		var loaddata = jQuery.extend(true, [], data);
 		for (var i = 0; i < loaddata.length; i++) {
-			loaddata[i]["Name"] = "Car " + loaddata[i]["Car Anonymized"];
 			delete loaddata[i]["Car"];
-			delete loaddata[i]["Car Anonymized"];
 			delete loaddata[i]["Sedan"];
 			delete loaddata[i]["Sports Car"];
 			delete loaddata[i]["SUV"];
 			delete loaddata[i]["Wagon"];
 			delete loaddata[i]["Minivan"];
 
-			playerPositionMap[loaddata[i]["Name"]] = "none";
+			playerPositionMap[loaddata[i]["Car Anonymized"]] = "none";
 			loaddata[i]["coord"] = {};
 		}
 		attr = Object.keys(loaddata[0]);
@@ -280,6 +280,8 @@ function addClassificationControls(data) {
 							// if (x % 2 == 0) {
 								localStorage.setItem('first_task', 'credit');
 								var w = window.open('postsurvey.html', '_self');
+								var filename = window.localStorage.getItem("userId") + "car";
+								console.save(allData2, filename);
 							// } else {
 							// 	localStorage.setItem('first_task', 'dog');
 							// 	var w = window.open('custom_axis_dog.html', '_self');
@@ -296,6 +298,8 @@ function addClassificationControls(data) {
 					// if (x % 2 == 0) {
 						localStorage.setItem('first_task', 'credit');
 						var w = window.open('postsurvey.html', '_self');
+						var filename = window.localStorage.getItem("userId") + "car";
+						console.save(allData2, filename);
 					// } else {
 					// 	localStorage.setItem('first_task', 'dog');
 					// 	var w = window.open('custom_axis_credit.html', '_self');

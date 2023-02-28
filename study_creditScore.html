@@ -92,7 +92,7 @@
 		<select id="cbY" name="cbY" onchange="updatebycb(&quot;Y&quot;,value);"
 				style="position: absolute; width: 100px"></select>
 		<select id="cbX" onchange="updatebycb(&quot;X&quot;,value);"
-				style="position: absolute; width: 175px"></select>
+				style="position: absolute; width: 175px; margin-top: 40px;"></select>
 	</div>
 	<div class="col-md-2" id="area3">
 		<div id="datapanel" class="table" width="200"></div>
@@ -103,8 +103,7 @@
 				<input type="checkbox" name="done" id="doneCheck"><span style="font-size:12px;">I am finished.
 						<br>Click <span class="studyBlue">Continue</span> to proceed.</span>
 			</form>
-			<button type="button" id="continueButton" class="studyNav" onclick="console
-			.save(allData)">Continue</button>
+			<button type="button" id="continueButton" class="studyNav">Continue</button>
 		</div>
 	</div>
 </div>
@@ -123,7 +122,7 @@
 			return;
 		}
 
-		if(!filename) filename = 'console.json'
+		if(!filename) filename = window.localStorage.getItem("userId") + "_credit.json";
 
 		if(typeof data === "object"){
 			data = JSON.stringify(data, undefined, 4)
@@ -191,7 +190,7 @@
 		cursorX = e.pageX;
 		cursorY = e.pageY;
 		var dataClick = [];
-		dataClick = ["dataclick " + "x: " + cursorX + " y: " + cursorY + " date: " + datetime];
+		dataClick = ["userID: " + userId + " dataclick " + "x: " + cursorX + " y: " + cursorY + " date: " + datetime];
 		allData.push(dataClick);
 	}
 	

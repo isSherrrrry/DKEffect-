@@ -17,6 +17,8 @@ var activePosition = "none";
 var playerPositionMap = {};
 var helpMouseoverStart = 0;
 var helpMouseoverEnd = 0;
+var allData = [];
+
 
 
 function getInitX() {
@@ -53,12 +55,11 @@ function loadData() {
 	d3.csv('data/credt_removed.csv', function (data) { // demo50 dataset
 		var loaddata = jQuery.extend(true, [], data);
 		for (var i = 0; i < loaddata.length; i++) {
-			loaddata[i]["name"] = "Name: " + loaddata[i]["Customer_id"];
 			delete loaddata[i]["Customer ID"];
 			delete loaddata[i]["Name"];
 			delete loaddata[i]["Credit Score"];
 
-			playerPositionMap[loaddata[i]["name"]] = "none";
+			playerPositionMap[loaddata[i]["creditID"]] = "none";
 			loaddata[i]["coord"] = {};
 		}
 		console.log(loadData[0]);
@@ -266,6 +267,8 @@ function addClassificationControls(data) {
 					var w = window.open("custom_axis_car.html", "_self");
 					window.localStorage.setItem("userId", window.localStorage.getItem("userId"));
 					window.localStorage.setItem("whichCondition", window.localStorage.getItem("whichCondition"));
+					var filename = window.localStorage.getItem("userId") + "credit";
+					console.save(allData, filename);
 				}
 			} else {
 				if (!allClassified) {
@@ -275,12 +278,16 @@ function addClassificationControls(data) {
 						var userResp = confirm(howMany + " out of " + data.length + " points have not been classified yet. Are you sure you want to continue?");
 						if (userResp) { // user wants to continue anyway
 							var w = window.open("custom_axis_car.html", "_self");
+							var filename = window.localStorage.getItem("userId") + "credit";
+							console.save(allData, filename);
 						}
 					}
 				} else {
 					var w = window.open("custom_axis_car.html", "_self");
 					window.localStorage.setItem("userId", window.localStorage.getItem("userId"));
 					window.localStorage.setItem("whichCondition", window.localStorage.getItem("whichCondition"));
+					var filename = window.localStorage.getItem("userId") + "credit";
+					console.save(allData);
 				}
 			}
 		} else alert("Check the box to certify you are finished with the task.");
