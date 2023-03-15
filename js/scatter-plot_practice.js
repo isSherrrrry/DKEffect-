@@ -426,8 +426,6 @@ SimpleGraph.prototype.datapoint_drag = function() {
     self.dragged.oldy = d.y;
     self.dragged.oldx = d.x;
 
-
-
     self.update();
   }
 };
@@ -932,7 +930,7 @@ function tabulate(dataitem, option) {
     columns = [dataitem["Name"],""];
 
   var table = d3.select(tid).append("table")
-          .attr("style", "margin-left: 5px"),
+          .attr("style", "margin-left: 5px; width:600px; height:100px; margin-top:100px"),
       thead = table.append("thead"),
       tbody = table.append("tbody");
 
@@ -978,6 +976,7 @@ function tabulate(dataitem, option) {
       .data(data)
       .enter()
       .append("tr");
+
 
   // create a cell in each row for each column
   var cells = rows.selectAll("td")
@@ -1054,7 +1053,7 @@ updatebycb = function(axistobeupdated, selectedattr) {
 
 
   // update IAL weight vector
-  ial.usermodel.setAttributeWeightVector(V2, true, {'level': 'INFO', 'eventType': 'set_attribute_weight_vector_select', 'whichAxis': axistobeupdated, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations});
+  ial.usermodel.setAttributeWeightVector(V2, true, {'level': 'INFO', 'eventType': 'set_attribute_weight_vector_select', 'whichAxis': axistobeupdated, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations, 'new_axis_name': newxname});
   // modified logging
   R7Insight.log(JSON.stringify(ial.logging.peek()));
   allData2.push(JSON.stringify(ial.logging.peek()));
