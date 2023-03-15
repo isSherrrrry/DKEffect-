@@ -269,6 +269,6 @@ circle:click {
   height: 80%;
 }
 
-tr td:nth-child(1){
+/* tr td:nth-child(1){
   width: 300px !important;
-}
+} */

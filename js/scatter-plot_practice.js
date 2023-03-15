@@ -930,7 +930,7 @@ function tabulate(dataitem, option) {
     columns = [dataitem["Name"],""];
 
   var table = d3.select(tid).append("table")
-          .attr("style", "margin-left: 5px; width:600px; height:100px; margin-top:100px"),
+          .attr("style", "margin-left: 5px; width:200px; height:100px; margin-top:100px"),
       thead = table.append("thead"),
       tbody = table.append("tbody");
 

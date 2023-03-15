@@ -156,6 +156,7 @@
 
 	var data = [];
 		// initialize rapid7
+	var userId = window.localStorage.getItem("userId");
 	window.webgazer.begin();
 	window.webgazer.setGazeListener(function(event){
 		var currentdate = new Date(); 
