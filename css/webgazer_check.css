@@ -3,13 +3,13 @@ body{
     flex-direction: row;
     justify-content: center;
     font-size: larger;
+    align-items: center;
 }
 
-div{
-    width: 700px;
-    margin-top: 200px;
-}
-
-div p{
+p{
     font-size: 20px;
+}
+
+label{
+    font-size: 16px;
 }
