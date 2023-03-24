@@ -120,7 +120,7 @@
 			return;
 		}
 
-		if(!filename) filename = window.localStorage.getItem("userId") + "_car.json";
+		filename = window.localStorage.getItem("userId") + "_car.json";
 
 		if(typeof data === "object"){
 			data = JSON.stringify(data, undefined, 4)
@@ -162,6 +162,7 @@
 					+ currentdate.getSeconds() + ":"
 					+ currentdate.getMilliseconds();
 		newData = ["x: " + event["x"] + "y: " + event["y"]];
+		console.log(event);
 		data = JSON.stringify({userID: userId, time:datetime, data: newData});
 		allData2.push(data);
 		
