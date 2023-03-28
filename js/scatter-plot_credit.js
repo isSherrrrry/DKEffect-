@@ -1,3 +1,4 @@
+
 var dropSize = 80, dropR = 20, axisOptions = {};
 var HOVER_WEIGHT = 1, DRAG_WEIGHT = 2, CLICK_WEIGHT = 3, DOUBLE_CLICK_WEIGHT = 4;
 var mouseoverStart = 0, mouseoverEnd = 0, dragStart = 0, dragEnd = 0;
@@ -220,8 +221,20 @@ SimpleGraph.prototype.plot_drag = function() {
   }
 };
 
+
+
 SimpleGraph.prototype.update = function() {
   var self = this;
+
+  var zoom = d3.behavior.zoom().on("zoom", function(event){
+    if (d3.event.scale < 1) {
+      console.log("Zoomed out");
+    } else {
+      console.log("Zoomed in");
+    }
+  });
+
+  this.vis.select("svg").call(zoom);
 
   var circle = this.vis.select("svg").selectAll("circle")
       .data(this.points);
@@ -337,6 +350,7 @@ SimpleGraph.prototype.update = function() {
           isDragging = false;
         }
       });
+
 
   if (istxtdata==true) {
     circle.attr("text", function(d) { return d["text"]["title"]; })
@@ -931,7 +945,7 @@ function tabulate(dataitem, option) {
 
 
   var table = d3.select(tid).append("table")
-          .attr("style", "margin-left: 5px"),
+          .attr("style", "margin-left: 5px; width:600px; height:100px; margin-top:100px"),
       thead = table.append("thead"),
       tbody = table.append("tbody");
 
@@ -1053,9 +1067,8 @@ updatebycb = function(axistobeupdated, selectedattr) {
 
 
   // update IAL weight vector
-  ial.usermodel.setAttributeWeightVector(V2, true, {'level': 'INFO', 'eventType': 'set_attribute_weight_vector_select', 'whichAxis': axistobeupdated, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations});
+  ial.usermodel.setAttributeWeightVector(V2, true, {'level': 'INFO', 'eventType': 'set_attribute_weight_vector_select', 'whichAxis': axistobeupdated, 'userId': window.localStorage.getItem("userId"), 'whichCondition': window.localStorage.getItem("whichCondition"), 'data_locations': data_locations, 'new_axis_name': newxname});
   // modified logging
-  R7Insight.log(JSON.stringify(ial.logging.peek()));
   allData.push(JSON.stringify(ial.logging.peek()));
   console.log("select axis");
   // LE.log(JSON.stringify(ial.logging.peek()));
@@ -1112,211 +1125,3 @@ addNewAxis = function(newxname, newaxisvector) {
   d3.select("#cbY").append("option").attr("value",newxname).text(newxname);
   d3.select("#cbX").append("option").attr("value",newxname).text(newxname);
 }
-
-// recomputeAttrWeightMetrics: if true, recompute attribute weight metrics
-// otherwise, don't update them
-/*function updateBias(recomputeAttrWeightMetrics) {
-  if (typeof recomputeAttrWeightMetrics == 'undefined')
-	  recomputeAttrWeightMetrics = true;
-  console.log("****Updating bias metrics****");
-  $("#datapanel2").html("");
-
-  var tip = d3.tip()
-	  .attr('class', 'd3-tip')
-	  .offset([-10, 0])
-	  .html(function(d) {
-		  return "<strong>" + ((100*d["metric_level"]).toFixed(0)) + "%</strong>";
-	  });
-
-  // mouseover bias bar
-  function mouseover(d) {
-	  if (d["bias_type"] == "bias_data_point_coverage") {
-		  //console.log("data point coverage");
-		  var visitedIds = d["info"]["visited"];
-
-		  // color circles that have been visited
-		  d3.selectAll("circle")
-		  	.attr("r", function(b) {
-		  		if (visitedIds.has(b["ial"]["id"])) return 11.0;
-		  		else return 3.0;
-		  	});
-	  } else if (d["bias_type"] == "bias_data_point_distribution") {
-		  //console.log("data point distribution");
-		  var maxInt = d["info"]["max_observed_interactions"];
-
-		  d3.selectAll("circle")
-		  	.attr("r", function(b) {
-		  		var observedInt = 0;
-		  		if (d["info"]["distribution_vector"].hasOwnProperty(b["ial"]["id"]))
-		  			observedInt = d["info"]["distribution_vector"][b["ial"]["id"]]["observed"];
-		  		if (observedInt == 0)
-		  			return 3.0;
-		  		else {
-		  			scaledVal = observedInt / maxInt;
-		  			if (scaledVal < 0.25) return 5.0;
-		  			else if (scaledVal < 0.5) return 7.0;
-		  			else if (scaledVal < 0.75) return 9.0;
-		  			else return 11.0
-		  		}
-		  	});
-	  } else if (d["bias_type"] == "bias_attribute_coverage") {
-		  //console.log("attribute coverage");
-
-		  d3.select("#X").selectAll(".bar")
-		  	.attr("fill-opacity", function(b) {
-		  		var metVal = 0;
-		  		if (d["info"]["attribute_vector"].hasOwnProperty(b["attr"]))
-		  			metVal = d["info"]["attribute_vector"][b["attr"]]["metric_level"];
-		  		return biasOpacityScale(metVal);
-		  	});
-
-		  d3.select("#Y").selectAll(".bar")
-		  	.attr("fill-opacity", function(b) {
-		  		var metVal = 0;
-		  		if (d["info"]["attribute_vector"].hasOwnProperty(b["attr"]))
-		  			metVal = d["info"]["attribute_vector"][b["attr"]]["metric_level"];
-		  		return biasOpacityScale(metVal);
-		  	});
-	  } else if (d["bias_type"] == "bias_attribute_distribution") {
-		  //console.log("attribute distribution");
-
-		  d3.select("#X").selectAll(".bar")
-		  	.attr("fill-opacity", function(b) {
-		  		var metVal = 0;
-		  		if (d["info"]["attribute_vector"].hasOwnProperty(b["attr"]))
-		  			metVal = d["info"]["attribute_vector"][b["attr"]]["metric_level"];
-		  		return biasOpacityScale(metVal);
-		  	});
-
-		  d3.select("#Y").selectAll(".bar")
-		  	.attr("fill-opacity", function(b) {
-		  		var metVal = 0;
-		  		if (d["info"]["attribute_vector"].hasOwnProperty(b["attr"]))
-		  			metVal = d["info"]["attribute_vector"][b["attr"]]["metric_level"];
-		  		return biasOpacityScale(metVal);
-		  	});
-	  } else if (d["bias_type"] == "bias_attribute_weight_coverage") {
-		  //console.log("attribute weight coverage");
-
-		  d3.select("#X").selectAll(".bar")
-		  	.attr("fill-opacity", function(b) {
-		  		var metVal = 0;
-		  		if (d["info"]["attribute_vector"].hasOwnProperty(b["attr"]))
-		  			metVal = d["info"]["attribute_vector"][b["attr"]]["metric_level"];
-		  		return biasOpacityScale(metVal);
-		  	});
-
-		  d3.select("#Y").selectAll(".bar")
-		  	.attr("fill-opacity", function(b) {
-		  		var metVal = 0;
-		  		if (d["info"]["attribute_vector"].hasOwnProperty(b["attr"]))
-		  			metVal = d["info"]["attribute_vector"][b["attr"]]["metric_level"];
-		  		return biasOpacityScale(metVal);
-		  	});
-	  } else if (d["bias_type"] == "bias_attribute_weight_distribution") {
-		  //console.log("attribute weight distribution");
-
-		  d3.select("#X").selectAll(".bar")
-		  	.attr("fill-opacity", function(b) {
-		  		var metVal = 0;
-		  		if (d["info"]["attribute_vector"].hasOwnProperty(b["attr"]))
-		  			metVal = d["info"]["attribute_vector"][b["attr"]]["metric_level"];
-		  		return biasOpacityScale(metVal);
-		  	});
-
-		  d3.select("#Y").selectAll(".bar")
-		  	.attr("fill-opacity", function(b) {
-		  		var metVal = 0;
-		  		if (d["info"]["attribute_vector"].hasOwnProperty(b["attr"]))
-		  			metVal = d["info"]["attribute_vector"][b["attr"]]["metric_level"];
-		  		return biasOpacityScale(metVal);
-		  	});
-	  }
-	  tip.show(d);
-  }
-
-  // mouseout bias bar
-  function mouseout(d) {
-	  d3.selectAll("circle")
-	  	.attr("r", 7.0)
-	  	.classed("visited", false)
-	  	.classed("unvisited", false)
-	  	.classed("heat0", false)
-	  	.classed("heat1", false)
-	  	.classed("heat2", false)
-	  	.classed("heat3", false)
-	  	.classed("heat4", false);
-	  d3.select("#X").selectAll(".bar")
-	  	.attr("fill-opacity", 1.0);
-	  d3.select("#Y").selectAll(".bar")
-	  	.attr("fill-opacity", 1.0);
-	  tip.hide(d);
-  }
-
-  var biasSvg = d3.select("#datapanel2").append("svg")
-	  .attr("id", "biasVis")
-	  .attr("top", $("#datapanel").height())
-	  .attr("left", $("#scplot").width())
-	  .attr("width", 2*$("#datapanel").width())
-	  .attr("height", $("#scplot").height() - $("#datapanel").height());
-
-  biasSvg.call(tip);
-
-  var dataPointCoverageResult = ial.usermodel.bias.computeDataPointCoverage();
-  console.log("Data Point Coverage Result");
-  console.log(dataPointCoverageResult);
-  //$("#datapanel2").append("<b>Data Point Coverage Metric:</b> " + dataPointCoverageResult['metric_level'].toFixed(4));
-
-  var dataPointDistributionResult = ial.usermodel.bias.computeDataPointDistribution();
-  console.log("Data Point Distribution Result");
-  console.log(dataPointDistributionResult);
-  //$("#datapanel2").append("<br><b>Data Point Distribution Metric:</b> " + dataPointDistributionResult['metric_level'].toFixed(4));
-
-  var attributeCoverageResult = ial.usermodel.bias.computeAttributeCoverage();
-  console.log("Attribute Coverage Result");
-  console.log(attributeCoverageResult);
-  //$("#datapanel2").append("<br><b>Attribute Coverage Metric:</b> " + attributeCoverageResult['metric_level'].toFixed(4));
-
-  var attributeDistributionResult = ial.usermodel.bias.computeAttributeDistribution();
-  console.log("Attribute Distribution Result");
-  console.log(attributeDistributionResult);
-  //$("#datapanel2").append("<br><b>Attribute Distribution Metric:</b> " + attributeDistributionResult['metric_level'].toFixed(4));
-
-  var attributeWeightCoverageResult = biasResults[4];
-  var attributeWeightDistributionResult = biasResults[5];
-  if (recomputeAttrWeightMetrics) {
-	  var attributeWeightCoverageResult = ial.usermodel.bias.computeAttributeWeightCoverage();
-	  //$("#datapanel2").append("<br><b>Attribute Weight Coverage Metric:</b> " + attributeWeightDistributionResult['metric_level'].toFixed(4));
-
-	  var attributeWeightDistributionResult = ial.usermodel.bias.computeAttributeWeightDistribution();
-	  //$("#datapanel2").append("<br><b>Attribute Weight Distribution Metric:</b> " + attributeWeightDistributionResult['metric_level'].toFixed(4));
-  }
-
-  console.log("Attribute Weight Coverage Result");
-  console.log(attributeWeightCoverageResult);
-
-  console.log("Attribute Weight Distribution Result");
-  console.log(attributeWeightDistributionResult);
-
-  biasResults = [dataPointCoverageResult, dataPointDistributionResult, attributeCoverageResult, attributeDistributionResult, attributeWeightCoverageResult, attributeWeightDistributionResult];
-  var bars = d3.select("#biasVis").selectAll("g")
-	  .data(biasResults)
-	  .enter().append("g")
-	  .attr("transform", function(d, i) { return "translate(10," + (i * 25 + (i + 1) * 10) + ")"; });
-  bars.append("rect")
-	  .attr("x", function(d, i) { return 75; })
-	  .attr("width", function(d, i) { return biasWidthScale(d["metric_level"]); })
-	  .attr("height", 25)
-	  .classed("biasBar", true)
-	  .classed("bar", true)
-	  .classed("bias", true)
-	  .on("mouseover", mouseover)
-	  .on("mouseout", mouseout);
-  bars.append("text")
-	  .attr("x", function(d, i) { return 70; })
-	  .attr("y", function(d, i) { return 12; })
-	  .attr("dy", ".35em")
-	  .text(function(d, i) { if (i == 0) return "Data Cov."; else if (i == 1) return "Data Distr."; else if (i == 2) return "Attr. Cov."; else if (i == 3) return "Attr. Distr."; else if (i == 4) return "Attr. Weight Cov."; else return "Attr. Weight Distr."; })
-	  .attr("text-anchor", "end");
-
-}*/

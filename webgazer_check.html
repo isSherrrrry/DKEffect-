@@ -1,0 +1,63 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>InterAxis</title>
+
+	<script src="js/webgazer.js"></script>
+
+	<link rel="stylesheet" href="lib/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/my-stylesheet.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.qtip.min.css">
+	<link rel="stylesheet" type="text/css" href="css/webgazer_check.css">
+
+</head>
+
+<body>
+
+	<div class="main_body">
+		<h3>Eye Tracking Check</h3>
+		<p>Please make sure that your face is positioned in the <b>center</b> and the border of the inner box is shown to be <b>green</b></p>
+		<input type="checkbox" name="green" id="green">
+		<label for="green">The border of the box is green AND I will remain this position for the rest of the study</label><br><br>
+		<button type="button" id="check_continue" class="studyNav" disabled><span id="check_inside">Continue</span></button>
+	</div>
+
+<script>
+
+	const checkbox = document.getElementById("green");
+	const button = document.getElementById("check_continue");
+	const button_inside = document.getElementById("check_inside");
+
+	checkbox.addEventListener("change", function() {
+	if (checkbox.checked) {
+		button.disabled = false;
+	} else {
+		button.disabled = true;
+	}
+	});
+
+	button.addEventListener("click", function() {
+		window.location.href = "custom_axis_credit.html";
+	})
+	button_inside.addEventListener("click", function(){
+		if (!checkbox.checked) {
+			alert("Please read the insturction and check the box");
+		}
+	})
+
+
+	window.webgazer.begin();
+	window.webgazer.setGazeListener(function(event){
+		var currentdate = new Date(); 
+		var datetime = currentdate.getHours() + ":"  
+					+ currentdate.getMinutes() + ":" 
+					+ currentdate.getSeconds() + ":"
+					+ currentdate.getMilliseconds();
+	}).begin();
+</script>
+
+
+</body>
+
+</html>

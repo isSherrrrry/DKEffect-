@@ -120,7 +120,7 @@
 			return;
 		}
 
-		if(!filename) filename = window.localStorage.getItem("userId") + "_car.json";
+		filename = window.localStorage.getItem("userId") + "_car.json";
 
 		if(typeof data === "object"){
 			data = JSON.stringify(data, undefined, 4)
@@ -152,13 +152,8 @@
 <script>
 
 	var data = [];
-	
-	var userId = Math.floor(Math.random() * 26) + Date.now();
-	// initialize rapid7
-	R7Insight.init({
-		token: 'd51a6564-1a20-435f-afef-41806a4bc4cb',
-		region: 'us3'
-	});
+		// initialize rapid7
+	var userId = window.localStorage.getItem("userId");
 	window.webgazer.begin();
 	window.webgazer.setGazeListener(function(event){
 		var currentdate = new Date(); 
@@ -167,6 +162,7 @@
 					+ currentdate.getSeconds() + ":"
 					+ currentdate.getMilliseconds();
 		newData = ["x: " + event["x"] + "y: " + event["y"]];
+		console.log(event);
 		data = JSON.stringify({userID: userId, time:datetime, data: newData});
 		allData2.push(data);
 		

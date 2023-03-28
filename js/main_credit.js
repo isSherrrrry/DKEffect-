@@ -261,6 +261,7 @@ function addClassificationControls(data) {
 						var userResp = confirm(howMany + " out of " + data.length + " points have not been classified yet. Are you sure you want to continue?");
 						if (userResp) { // user wants to continue anyway
 							var w = window.open("custom_axis_car.html", "_self");
+							console.save(allData, filename);
 						}
 					}
 				} else {

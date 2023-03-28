@@ -268,3 +268,7 @@ circle:click {
   display: inline-block;
   height: 80%;
 }
+
+/* tr td:nth-child(1){
+  width: 300px !important;
+} */
