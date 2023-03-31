@@ -269,7 +269,7 @@ function addClassificationControls(data) {
 			}
 			// var prevURL = document.referrer;
 			if (!allClassified) {
-				if ((data.length - howMany) <= (data.length * 0.8)) {
+				if ((data.length - howMany) <= (data.length * 1)) {
 					var userResp = alert("Please classify more points.");
 				} else {
 					var userResp = confirm(howMany + " out of " + data.length + " points have not been classified yet. Are you sure you want to continue?");
