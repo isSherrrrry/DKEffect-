@@ -19,12 +19,18 @@
     }
 
     document.body.innerHTML = document.body.innerHTML + '<p><h3>Please copy and paste <b><font class="studyRed">' + window.localStorage.getItem("userId") + '</font></b> into the id field of the survey. Please be sure to scroll through to complete the entire survey before continuing.</h3></p>';
-    document.body.innerHTML = document.body.innerHTML + '<iframe src="https://emorycollege.co1.qualtrics.com/jfe/form/SV_eJ02rOjxcLBWakm" width="900" height="2050" frameborder="0" marginheight="100" marginwidth="0" top="30">Loading...</iframe>';
+    document.body.innerHTML = document.body.innerHTML + '<iframe id="bi_iframe" src="https://emorycollege.co1.qualtrics.com/jfe/form/SV_eJ02rOjxcLBWakm" onload="adjustIframe()"; frameborder="0" scrolling="auto">Loading...</iframe>';
+    // document.body.innerHTML = document.body.innerHTML + '<iframe id="bi_iframe" src="https://emorycollege.co1.qualtrics.com/jfe/form/SV_eJ02rOjxcLBWakm" width="900" height="2050" frameborder="0" marginheight="100" marginwidth="0" top="30">Loading...</iframe>';
     document.body.innerHTML = document.body.innerHTML + '<form><input id="txt_submit" type="text" name="test" style="border-radius: 5px; -webkit-border-radius: 5px; margin-top:30px; width:500px; height: 50px; text-align:center" placeholder="Input the code here"><span id="msg"></span></form>';    document.body.innerHTML = document.body.innerHTML + '<h3>Input the code showed after you submit the survey and then click <b><span class="studyBlue">Continue</span></b> to proceed to next phase.</h3>';
     document.body.innerHTML = document.body.innerHTML + '<button type="button" id="continueButton" onclick="show()" style="width:500px; height:50px" class="studyNav">Continue</button>';
 
     console.log('user id: ', window.localStorage.getItem("userId"));
 
+    function adjustIframe(){
+        var ifm= document.getElementById("bi_iframe");
+        ifm.height=document.documentElement.clientHeight;
+        ifm.width=document.documentElement.clientWidth;
+    }
 
     document.getElementById("continueButton").onclick = function () {
         var txt_submit = document.getElementById("txt_submit");
